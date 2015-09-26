@@ -32,7 +32,7 @@ public class SoldierSeek : BaseState<Soldier>
         Debug.Log(NPC.Velocity);
         
         // Locomotion
-        var targetForward = NPC.transform.position - NPC.transform.position;
+        var targetForward = NPC.Target.position - NPC.transform.position;
 
         NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), Time.deltaTime);
         NPC.AnimationController.SetBool("IsAim", true);
