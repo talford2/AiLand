@@ -6,11 +6,13 @@ public class Soldier : MonoBehaviour
 
 	public Animator AnimationController;
 
-    public SoldierSteering Steering { get; set; }
+	public SoldierSteering Steering { get; set; }
 
-    public Vector3 Velocity { get; set; }
+	public Vector3 Velocity { get; set; }
 
-    public float MaxSpeed { get; set; }
+	public Transform Target;
+
+	public float MaxSpeed { get; set; }
 
 	void Start()
 	{

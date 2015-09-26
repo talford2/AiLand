@@ -2,8 +2,6 @@
 
 public class SoldierSeek : BaseState<Soldier>
 {
-    private Vector3 destination;
-
 	public SoldierSeek(Soldier npc) : base(npc)
 	{
 		Debug.Log("Seek");
@@ -15,11 +13,11 @@ public class SoldierSeek : BaseState<Soldier>
         var sqrMaxSpeed = NPC.MaxSpeed*NPC.MaxSpeed;
         var steerForce = Vector3.zero;
 
-        steerForce += NPC.Steering.ArriveForce(destination);
+        steerForce += NPC.Steering.ArriveForce(NPC.Target.position);
         if (steerForce.sqrMagnitude > sqrMaxSpeed)
             return NPC.MaxSpeed*steerForce.normalized;
 
-        steerForce += NPC.Steering.SeekForce(destination);
+        steerForce += NPC.Steering.SeekForce(NPC.Target.position);
         if (steerForce.sqrMagnitude > sqrMaxSpeed)
             return NPC.MaxSpeed*steerForce.normalized;
 
@@ -33,7 +31,7 @@ public class SoldierSeek : BaseState<Soldier>
         NPC.Velocity += GetSteeringForce()*Time.deltaTime;
         
         // Locomotion
-        NPC.transform.rotation = Quaternion.LookRotation(destination - NPC.transform.position);
+        NPC.transform.rotation = Quaternion.LookRotation(NPC.Target.position - NPC.transform.position);
         NPC.AnimationController.SetBool("IsAim", true);
         NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
     }
