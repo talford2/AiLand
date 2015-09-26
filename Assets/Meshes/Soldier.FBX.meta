@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 2e584ea1747a6864490337584ae07e2e
+timeCreated: 1443285477
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: AnkleLeft
+    100002: AnkleRight
+    100004: Fingers1Left
+    100006: Fingers1Right
+    100008: Fingers2Left
+    100010: Fingers2Left 1
+    100012: Fingers2Right
+    100014: Fingers2Right 1
+    100016: FootHelperLeft
+    100018: FootHelperRight
+    100020: FootLeft
+    100022: FootRight
+    100024: Ground
+    100026: GunPlaceholder
+    100028: HandHelperLeft
+    100030: HandHelperRight
+    100032: Head
+    100034: IK Chain001
+    100036: IK Chain002
+    100038: IK Chain003
+    100040: IK Chain004
+    100042: LowerArmLeft
+    100044: LowerArmRight
+    100046: LowerLegLeft
+    100048: LowerLegRight
+    100050: MidTorso
+    100052: Neck
+    100054: Pelvis
+    100056: ShoulderLeft
+    100058: ShoulderRight
+    100060: Soldier
+    100062: //RootNode
+    100064: ThumbLeft
+    100066: ThumbRight
+    100068: ToeLeft
+    100070: ToeRight
+    100072: UpperArmLeft
+    100074: UpperArmRight
+    100076: UpperLegLeft
+    100078: UpperLegRight
+    100080: UpperTorso
+    100082: WristLeft
+    100084: WristRight
+    400000: AnkleLeft
+    400002: AnkleRight
+    400004: Fingers1Left
+    400006: Fingers1Right
+    400008: Fingers2Left
+    400010: Fingers2Left 1
+    400012: Fingers2Right
+    400014: Fingers2Right 1
+    400016: FootHelperLeft
+    400018: FootHelperRight
+    400020: FootLeft
+    400022: FootRight
+    400024: Ground
+    400026: GunPlaceholder
+    400028: HandHelperLeft
+    400030: HandHelperRight
+    400032: Head
+    400034: IK Chain001
+    400036: IK Chain002
+    400038: IK Chain003
+    400040: IK Chain004
+    400042: LowerArmLeft
+    400044: LowerArmRight
+    400046: LowerLegLeft
+    400048: LowerLegRight
+    400050: MidTorso
+    400052: Neck
+    400054: Pelvis
+    400056: ShoulderLeft
+    400058: ShoulderRight
+    400060: //RootNode
+    400062: Soldier
+    400064: ThumbLeft
+    400066: ThumbRight
+    400068: ToeLeft
+    400070: ToeRight
+    400072: UpperArmLeft
+    400074: UpperArmRight
+    400076: UpperLegLeft
+    400078: UpperLegRight
+    400080: UpperTorso
+    400082: WristLeft
+    400084: WristRight
+    2300000: GunPlaceholder
+    3300000: GunPlaceholder
+    4300000: Soldier
+    4300002: GunPlaceholder
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Soldier
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
