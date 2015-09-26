@@ -14,6 +14,11 @@ public class Soldier : MonoBehaviour
 
 	public float MaxSpeed { get; set; }
 
+    void Awake()
+    {
+        Steering = new SoldierSteering(this);
+    }
+
 	void Start()
 	{
 		State = new SoldierIdle(this);
