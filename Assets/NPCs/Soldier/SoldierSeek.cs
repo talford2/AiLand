@@ -27,12 +27,18 @@ public class SoldierSeek : BaseState<Soldier>
     public override void Update()
     {
         base.Update();
-
+        Debug.Log("RUN SEEK UPDATE!");
         NPC.Velocity += GetSteeringForce()*Time.deltaTime;
+        Debug.Log(NPC.Velocity);
         
         // Locomotion
-        NPC.transform.rotation = Quaternion.LookRotation(NPC.Target.position - NPC.transform.position);
+        var targetForward = NPC.transform.position - NPC.transform.position;
+
+        NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), Time.deltaTime);
         NPC.AnimationController.SetBool("IsAim", true);
         NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
+
+        NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
+        NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
     }
 }
