@@ -7,7 +7,7 @@ public class Soldier : MonoBehaviour
 
 	void Start()
 	{
-		State = new SoldierIdleState(this);
+		State = new SoldierIdle(this);
 	}
 
 	void Update()
