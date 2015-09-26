@@ -1267,6 +1267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66efaf4ea628f2e45a62f3403d917c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AnimationController: {fileID: 9555350}
 --- !u!137 &13789082
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
