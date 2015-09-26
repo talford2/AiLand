@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Soldier : MonoBehaviour
 {
 	public BaseState<Soldier> State { get; set; }
 
 	public Animator AnimationController;
+
+    public Vector3 Velocity { get; set; }
+
+    public float MaxSpeed { get; set; }
 
 	void Start()
 	{
