@@ -48,7 +48,7 @@ public class NpcPath {
             isFinalPoint = false;
         }
 
-        var toCurPathPos = AtHeight(path[curPathIndex], 0f) - AtHeight(NPC.transform.position, 0f);
+        var toCurPathPos = Utility.AtHeight(path[curPathIndex], 0f) - Utility.AtHeight(NPC.transform.position, 0f);
         if (toCurPathPos.sqrMagnitude < 0.1f)
         {
             curPathIndex++;
@@ -70,10 +70,5 @@ public class NpcPath {
     public Vector3 GetCurrentPathTargetPosition()
     {
         return path[curPathIndex];
-    }
-
-    private Vector3 AtHeight(Vector3 postion, float height)
-    {
-        return new Vector3(postion.x, height, postion.z);
     }
 }
