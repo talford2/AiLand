@@ -30,7 +30,7 @@ public class HearingSensor : MonoBehaviour
 		StartCoroutine(Detect(DetectFrequency));
 	}
 
-	private void OnDrawGizmosSelected()
+	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.white;
 		Gizmos.DrawWireSphere(transform.position, Distance);
