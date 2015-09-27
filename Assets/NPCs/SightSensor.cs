@@ -32,11 +32,12 @@ public class SightSensor : MonoBehaviour
 				{
 					var sightRay = new Ray(TransformObject.position, toDetected);
 					RaycastHit sightHit;
-					if (Physics.Raycast(sightRay, out sightHit, Distance))
-					{
-						Debug.Log("DETECTED: " + detected.name);
-						SeeTarget(detected.transform);
-					}
+				    if (Physics.Raycast(sightRay, out sightHit, Distance))
+				    {
+				        Debug.Log("DETECTED: " + sightHit.collider.name);
+				        if (sightHit.collider == detected)
+				            SeeTarget(detected.transform);
+				    }
 				}
 			}
 		}
