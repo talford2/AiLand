@@ -41,6 +41,12 @@ public class SoldierChase : BaseState<Soldier>
 	{
 		base.Update();
 
+		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(NPC.ShootAttackRadius))
+		{
+			NPC.State = new SoldierShootAttack(NPC);
+			return;
+		}
+
 		npcPath.Update(NPC.Target.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
@@ -58,10 +64,6 @@ public class SoldierChase : BaseState<Soldier>
 
 		npcPath.SetLastDestination(NPC.Target.position);
 
-		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(NPC.ShootAttackRadius))
-		{
-			NPC.State = new SoldierShootAttack(NPC);
-		}
 
 		// Target expires start seeking
 		targetExpirationCooldown -= Time.deltaTime;
@@ -71,6 +73,7 @@ public class SoldierChase : BaseState<Soldier>
 			NPC.Target = null;
 			NPC.State = new SoldierSeek(NPC, lastSeenPoint);
 		}
+
 	}
 
 	public override void SeeTarget(Transform target)
