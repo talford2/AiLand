@@ -11,8 +11,6 @@ public class SoldierSeek : BaseState<Soldier>
 	public SoldierSeek(Soldier npc, Vector3 seekPoint) : base(npc)
 	{
 		Debug.Log("Seek");
-		NPC.sightSensor.SeeTarget += SeeTarget;
-		NPC.sightSensor.SeeTarget -= SeeTarget;
 		SeekPoint = seekPoint;
 		NPC.MaxSpeed = 1f;
 		npcPath = new NpcPath(NPC);

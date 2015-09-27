@@ -10,9 +10,9 @@ public class Soldier : MonoBehaviour
 
 	public Vector3 Velocity { get; set; }
 
-	public SightSensor sightSensor { get; set; }
+    private SightSensor sightSensor;
 
-	public HearingSensor hearingSensor { get; set; }
+    private HearingSensor hearingSensor;
 
 	public float TargetExpirationTime = 2f;
 	private float targetExpirationCooldown = 0;
