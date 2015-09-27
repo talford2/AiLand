@@ -37,7 +37,7 @@ public class SoldierSeek : BaseState<Soldier>
 		return steerForce;
 	}
 
-	private void SeeTarget(Transform target)
+	public override void SeeTarget(Transform target)
 	{
 		NPC.State = new SoldierChase(NPC, target);
 	}
