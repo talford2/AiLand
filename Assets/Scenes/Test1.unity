@@ -2758,6 +2758,14 @@ Prefab:
       propertyPath: DetectFrequency
       value: .300000012
       objectReference: {fileID: 0}
+    - target: {fileID: 11486614, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+      propertyPath: Distance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11418886, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+      propertyPath: Distance
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
   m_IsPrefabParent: 0

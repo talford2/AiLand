@@ -17,7 +17,7 @@ public class HearingSensor : MonoBehaviour
 	private IEnumerator Detect(float delay)
 	{
 		yield return new WaitForSeconds(delay);
-		Debug.Log("LISTEN");
+		//Debug.Log("LISTEN");
 		var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
 		foreach (var detected in detectedObjects)
 		{

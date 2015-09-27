@@ -40,6 +40,11 @@ public class SoldierSeek : BaseState<Soldier>
 		NPC.State = new SoldierChase(NPC, target);
 	}
 
+	public override void HearTarget(Transform target)
+	{
+		SeekPoint = target.position;
+	}
+
 	public override void Update()
 	{
 		base.Update();
