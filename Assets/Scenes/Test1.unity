@@ -2350,6 +2350,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 983334351}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1012727254 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 402040, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+  m_PrefabInternal: {fileID: 1193398813}
 --- !u!1 &1015474935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2754,6 +2758,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11486614, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+      propertyPath: TransformObject
+      value: 
+      objectReference: {fileID: 1012727254}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
   m_IsPrefabParent: 0

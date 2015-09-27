@@ -10,6 +10,8 @@ public class SightSensor : MonoBehaviour
 
 	public event Action<Transform> SeeTarget;
 
+	public Transform TransformObject;
+
 	private void Start()
 	{
 		StartCoroutine(Detect(1f));
@@ -20,30 +22,36 @@ public class SightSensor : MonoBehaviour
 		yield return new WaitForSeconds(delay);
 		Debug.Log("LOOK");
 		var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
-	    foreach (var detected in detectedObjects)
-	    {
-	        if (SeeTarget != null)
-	        {
-	            var toDetected = detected.transform.position - transform.position;
-                var angleTo = Vector3.Angle(transform.forward, toDetected);
-	            if (angleTo < FieldOfView)
-	            {
-                    var sightRay = new Ray(transform.position, toDetected);
-	                RaycastHit sightHit;
-	                if (Physics.Raycast(sightRay, out sightHit, Distance))
-	                {
-                        Debug.Log("DETECTED: " + detected.name);
-                        SeeTarget(detected.transform);
-	                }
-	            }
-	        }
-	    }
-	    StartCoroutine(Detect(DetectFrequency));
+		foreach (var detected in detectedObjects)
+		{
+			if (SeeTarget != null)
+			{
+				var toDetected = detected.transform.position - TransformObject.position;
+				var angleTo = Vector3.Angle(TransformObject.forward, toDetected);
+				if (angleTo < FieldOfView)
+				{
+					var sightRay = new Ray(TransformObject.position, toDetected);
+					RaycastHit sightHit;
+					if (Physics.Raycast(sightRay, out sightHit, Distance))
+					{
+						Debug.Log("DETECTED: " + detected.name);
+						SeeTarget(detected.transform);
+					}
+				}
+			}
+		}
+		StartCoroutine(Detect(DetectFrequency));
+	}
+
+	private void Update()
+	{
+		Debug.DrawRay(TransformObject.position, TransformObject.forward * Distance, Color.yellow);
+		Debug.DrawLine(TransformObject.position, TransformObject.forward * Distance, Color.red);
 	}
 
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.white;
-		Gizmos.DrawWireSphere(transform.position, Distance);
+		Gizmos.DrawWireSphere(TransformObject.position, Distance);
 	}
 }
