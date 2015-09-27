@@ -19,4 +19,8 @@ public abstract class BaseState<T>
 	}
 
 	public virtual void Update() { }
+
+	public virtual void SeeTarget(Transform tagret) { }
+
+	public virtual void HearTarget(Transform target) { }
 }

@@ -26,6 +26,25 @@ public class Soldier : MonoBehaviour
 		Steering = new SoldierSteering(this);
 		sightSensor = GetComponent<SightSensor>();
 		hearingSensor = GetComponent<HearingSensor>();
+
+		sightSensor.SeeTarget += SeeTarget;
+		hearingSensor.HearTarget += HearTarget;
+	}
+
+	private void HearTarget(Transform target)
+	{
+		if (State != null)
+		{
+			State.HearTarget(target);
+		}
+	}
+
+	private void SeeTarget(Transform target)
+	{
+		if (State != null)
+		{
+			State.SeeTarget(target);
+		}
 	}
 
 	void Start()
