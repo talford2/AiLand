@@ -552,6 +552,7 @@ GameObject:
   - 95: {fileID: 9555350}
   - 114: {fileID: 11403054}
   - 114: {fileID: 11486614}
+  - 114: {fileID: 11418886}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -1270,6 +1271,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
   Target: {fileID: 0}
+--- !u!114 &11418886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd1033b4dc9103478b6030d82a38470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 30
+  DetectFrequency: 2
 --- !u!114 &11486614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1294,7 +1308,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 94eb29544cd5a0f43932b3ff2b3f5e21, type: 2}
+  - {fileID: 2100000, guid: 6e2989ff01f76964087f156e36da9b16, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
