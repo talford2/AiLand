@@ -51,7 +51,8 @@ public class Soldier : MonoBehaviour
 
 	void Start()
 	{
-		State = new SoldierIdle(this);
+		//State = new SoldierIdle(this);
+        State = new SoldierWander(this);
 	}
 
 	void Update()

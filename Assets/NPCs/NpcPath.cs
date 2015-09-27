@@ -6,6 +6,7 @@ public class NpcPath {
     private Vector3[] path;
     private int curPathIndex;
     private bool isFinalPoint;
+    private bool hasArrived;
 
     private MonoBehaviour npc;
 
@@ -40,6 +41,8 @@ public class NpcPath {
 
     public void Update(Vector3 destination)
     {
+        hasArrived = false;
+
         var deltaDestination = destination - lastDestination;
         if (deltaDestination.sqrMagnitude > 0.1f)
         {
@@ -57,6 +60,7 @@ public class NpcPath {
         if (curPathIndex > path.Length - 1)
         {
             Debug.Log("DESTINATION REACHED!");
+            hasArrived = true;
             curPathIndex = path.Length - 1;
         }
     }
@@ -64,6 +68,11 @@ public class NpcPath {
     public bool IsFinalPathPoint()
     {
         return isFinalPoint;
+    }
+
+    public bool HasArrived()
+    {
+        return hasArrived;
     }
 
     public Vector3 GetCurrentPathTargetPosition()
