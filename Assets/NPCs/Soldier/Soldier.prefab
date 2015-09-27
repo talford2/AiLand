@@ -551,6 +551,7 @@ GameObject:
   - 4: {fileID: 412328}
   - 95: {fileID: 9555350}
   - 114: {fileID: 11403054}
+  - 114: {fileID: 11486614}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -1268,6 +1269,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
+  Target: {fileID: 0}
+--- !u!114 &11486614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fcb314ecc7f9b1429ca36b1db5b168d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 10
+  FieldOfView: 0
+  DetectFrequency: 2
 --- !u!137 &13789082
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1355,6 +1371,14 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7e7b72af1fae85648b91f3dd946dbb6e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: DetectFrequency
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Distance
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185452}

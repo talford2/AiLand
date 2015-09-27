@@ -16,9 +16,10 @@ public class SightSensor : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Debug.Log("CHECK");
-        var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask(""));
+        var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
         foreach (var detected in detectedObjects)
         {
+            Debug.Log("DETECTED: " + detected.name);
         }
         StartCoroutine(Detect(DetectFrequency));
     }
