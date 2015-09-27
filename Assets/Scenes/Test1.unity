@@ -2756,7 +2756,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11418886, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: DetectFrequency
-      value: .5
+      value: .300000012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
@@ -3178,6 +3178,7 @@ GameObject:
   - 92: {fileID: 1450946545}
   - 124: {fileID: 1450946544}
   - 81: {fileID: 1450946543}
+  - 114: {fileID: 1450946548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3246,12 +3247,23 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1450946542}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: .382683456, y: 0, z: 0, w: .923879504}
+  m_LocalPosition: {x: 0, y: 20, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1450946548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1450946542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d066b098ef4ce0d4e8d75eddf6768433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1476639419
 GameObject:
   m_ObjectHideFlags: 0
