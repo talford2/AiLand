@@ -53,5 +53,10 @@ public class SightSensor : MonoBehaviour
 	{
 		Gizmos.color = Color.white;
 		Gizmos.DrawWireSphere(TransformObject.position, Distance);
+
+        var fovLeft = Quaternion.Euler(0, -FieldOfView * 0.5f, 0f);
+        var fovRight = Quaternion.Euler(0, FieldOfView * 0.5f, 0f);
+        Gizmos.DrawLine(TransformObject.position, TransformObject.position + fovLeft * TransformObject.forward * Distance);
+        Gizmos.DrawLine(TransformObject.position, TransformObject.position + fovRight * TransformObject.forward * Distance);
 	}
 }
