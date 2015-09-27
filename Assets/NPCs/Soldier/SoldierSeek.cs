@@ -55,6 +55,7 @@ public class SoldierSeek : BaseState<Soldier>
             }
         }
 
+        // Increment path index on arriving at current path point
         var toCurPathPos = AtHeight(path[curPathIndex], 0f) - AtHeight(NPC.transform.position, 0f);
         if (toCurPathPos.sqrMagnitude < 0.1f)
         {
@@ -62,6 +63,7 @@ public class SoldierSeek : BaseState<Soldier>
             useArriveForce = curPathIndex >= path.Length - 1;
         }
 
+        // Arrive and avoid out of range indexes.
         if (curPathIndex > path.Length - 1)
         {
             Debug.Log("DESTINATION REACHED!");
