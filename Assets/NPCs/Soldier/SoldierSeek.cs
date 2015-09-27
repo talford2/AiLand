@@ -42,11 +42,11 @@ public class SoldierSeek : BaseState<Soldier>
 		base.Update();
 
 		// If target has changed position recalculate path
-		var deltaTargetPos = NPC.Target.position - lastTargetPosition;
+		var deltaTargetPos = SeekPoint - lastTargetPosition;
 		if (deltaTargetPos.sqrMagnitude > 1f)
 		{
 			var navPath = new NavMeshPath();
-			if (NavMesh.CalculatePath(NPC.transform.position, NPC.Target.position, NavMesh.AllAreas, navPath))
+			if (NavMesh.CalculatePath(NPC.transform.position, SeekPoint, NavMesh.AllAreas, navPath))
 			{
 				path = navPath.corners;
 				curPathIndex = 0;
@@ -85,7 +85,7 @@ public class SoldierSeek : BaseState<Soldier>
 		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
 		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
 
-		lastTargetPosition = NPC.Target.position;
+		lastTargetPosition = SeekPoint;
 	}
 
 	private Vector3 AtHeight(Vector3 postion, float height)
