@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class TargetController : MonoBehaviour
