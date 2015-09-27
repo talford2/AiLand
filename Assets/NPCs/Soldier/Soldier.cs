@@ -10,12 +10,9 @@ public class Soldier : MonoBehaviour
 
 	public Vector3 Velocity { get; set; }
 
-    private SightSensor sightSensor;
+	private SightSensor sightSensor;
 
-    private HearingSensor hearingSensor;
-
-	public float TargetExpirationTime = 2f;
-	private float targetExpirationCooldown = 0;
+	private HearingSensor hearingSensor;
 
 	public Transform Target;
 
@@ -47,6 +44,11 @@ public class Soldier : MonoBehaviour
 		}
 	}
 
+	public bool IsDistanceGreaterThan(float distance)
+	{
+		return (Target.position - transform.position).sqrMagnitude > (distance * distance);
+	}
+
 	void Start()
 	{
 		State = new SoldierIdle(this);
@@ -54,13 +56,6 @@ public class Soldier : MonoBehaviour
 
 	void Update()
 	{
-		targetExpirationCooldown -= Time.deltaTime;
-		if (targetExpirationCooldown <= 0 && Target != null)
-		{
-			Debug.Log("I've lost the target");
-			State = new SoldierSeek(this, Target.position);
-			Target = null;
-		}
 		State.Update();
 	}
 }

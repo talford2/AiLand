@@ -6,8 +6,6 @@ public class SoldierChase : BaseState<Soldier>
 
 	private float targetExpirationCooldown = 0;
 
-	private Transform chaseTransform;
-
 	private readonly NpcPath npcPath;
 
 	private bool useArriveForce;
@@ -15,7 +13,7 @@ public class SoldierChase : BaseState<Soldier>
 	public SoldierChase(Soldier npc, Transform chaseTransform) : base(npc)
 	{
 		Debug.Log("Chase");
-		this.chaseTransform = chaseTransform;
+		NPC.Target = chaseTransform;
 		npcPath = new NpcPath(NPC);
 		targetExpirationCooldown = TargetExpirationTime;
 	}
@@ -43,7 +41,7 @@ public class SoldierChase : BaseState<Soldier>
 	{
 		base.Update();
 
-		npcPath.Update(chaseTransform.position);
+		npcPath.Update(NPC.Target.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
 		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
@@ -58,12 +56,23 @@ public class SoldierChase : BaseState<Soldier>
 		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
 		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
 
-		npcPath.SetLastDestination(chaseTransform.position);
+		npcPath.SetLastDestination(NPC.Target.position);
 
+		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(3))
+		{
+			Debug.Log("A");
+			NPC.State = new SoldierShootAttack(NPC);
+		}
+		else
+		{
+			Debug.Log("B");
+		}
+
+		// Target expires start seeking
 		targetExpirationCooldown -= Time.deltaTime;
 		if (targetExpirationCooldown <= 0)
 		{
-			var lastSeenPoint = chaseTransform.position;
+			var lastSeenPoint = NPC.Target.position;
 			NPC.Target = null;
 			NPC.State = new SoldierSeek(NPC, lastSeenPoint);
 		}
@@ -72,6 +81,7 @@ public class SoldierChase : BaseState<Soldier>
 	public override void SeeTarget(Transform target)
 	{
 		targetExpirationCooldown = TargetExpirationTime;
+		NPC.Target = target;
 		base.SeeTarget(target);
 	}
 }
