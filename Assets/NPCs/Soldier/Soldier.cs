@@ -12,6 +12,8 @@ public class Soldier : MonoBehaviour
 
 	public SightSensor sightSensor { get; set; }
 
+    public HearingSensor hearingSensor { get; set; }
+
 	public Transform Target;
 
 	public float MaxSpeed { get; set; }
@@ -22,6 +24,9 @@ public class Soldier : MonoBehaviour
 
 		sightSensor = GetComponent<SightSensor>();
 		sightSensor.SeeTarget += SeeTarget;
+
+	    hearingSensor = GetComponent<HearingSensor>();
+	    hearingSensor.HearTarget += HearTarget;
 	}
 
 	private void SeeTarget(Transform target)
@@ -30,6 +35,11 @@ public class Soldier : MonoBehaviour
 		Target = target;
 		State = new SoldierChase(this);
 	}
+
+    private void HearTarget(Transform target)
+    {
+        Debug.Log("I heard something.");
+    }
 
 	void Start()
 	{
