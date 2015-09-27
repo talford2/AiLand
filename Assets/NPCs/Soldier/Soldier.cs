@@ -16,6 +16,8 @@ public class Soldier : MonoBehaviour
 
 	public Transform Target;
 
+	public float ShootAttackRadius = 3;
+
 	public float MaxSpeed { get; set; }
 
 	void Awake()

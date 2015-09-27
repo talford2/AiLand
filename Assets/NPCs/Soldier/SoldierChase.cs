@@ -58,14 +58,9 @@ public class SoldierChase : BaseState<Soldier>
 
 		npcPath.SetLastDestination(NPC.Target.position);
 
-		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(3))
+		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(NPC.ShootAttackRadius))
 		{
-			Debug.Log("A");
 			NPC.State = new SoldierShootAttack(NPC);
-		}
-		else
-		{
-			Debug.Log("B");
 		}
 
 		// Target expires start seeking

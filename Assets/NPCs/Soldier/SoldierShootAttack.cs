@@ -11,4 +11,20 @@ public class SoldierShootAttack : BaseState<Soldier>
 		NPC.AnimationController.SetFloat("HorizontalSpeed", 0);
 		NPC.AnimationController.SetTrigger("Shoot");
 	}
+
+	public override void Update()
+	{
+		if (NPC.IsDistanceGreaterThan(NPC.ShootAttackRadius))
+		{
+			if (NPC.Target != null)
+			{
+				NPC.State = new SoldierChase(NPC, NPC.Target);
+			}
+			else
+			{
+				NPC.State = new SoldierIdle(NPC);
+			}
+		}
+		base.Update();
+	}
 }
