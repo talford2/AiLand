@@ -31,9 +31,12 @@ public class Soldier : MonoBehaviour
 
 	private void SeeTarget(Transform target)
 	{
-		Debug.Log("I saw something, I'm going to chase it");
-		Target = target;
-		State = new SoldierChase(this);
+		if (Target == null)
+		{
+			Debug.Log("I saw something, I'm going to chase it");
+			Target = target;
+			State = new SoldierChase(this);
+		}
 	}
 
     private void HearTarget(Transform target)
