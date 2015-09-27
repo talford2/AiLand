@@ -12,7 +12,10 @@ public class Soldier : MonoBehaviour
 
 	public SightSensor sightSensor { get; set; }
 
-    public HearingSensor hearingSensor { get; set; }
+	public HearingSensor hearingSensor { get; set; }
+
+	public float TargetExpirationTime = 2f;
+	private float targetExpirationCooldown = 0;
 
 	public Transform Target;
 
@@ -25,8 +28,8 @@ public class Soldier : MonoBehaviour
 		sightSensor = GetComponent<SightSensor>();
 		sightSensor.SeeTarget += SeeTarget;
 
-	    hearingSensor = GetComponent<HearingSensor>();
-	    hearingSensor.HearTarget += HearTarget;
+		hearingSensor = GetComponent<HearingSensor>();
+		hearingSensor.HearTarget += HearTarget;
 	}
 
 	private void SeeTarget(Transform target)
@@ -35,14 +38,15 @@ public class Soldier : MonoBehaviour
 		{
 			Debug.Log("I saw something, I'm going to chase it");
 			Target = target;
+			targetExpirationCooldown = TargetExpirationTime;
 			State = new SoldierChase(this);
 		}
 	}
 
-    private void HearTarget(Transform target)
-    {
-        Debug.Log("I heard something.");
-    }
+	private void HearTarget(Transform target)
+	{
+		Debug.Log("I heard something.");
+	}
 
 	void Start()
 	{
@@ -51,6 +55,13 @@ public class Soldier : MonoBehaviour
 
 	void Update()
 	{
+		targetExpirationCooldown -= Time.deltaTime;
+		if (targetExpirationCooldown <= 0 && Target != null)
+		{
+			Debug.Log("I've lost the target");
+			State = new SoldierSeek(this, Target.position);
+			Target = null;
+		}
 		State.Update();
 	}
 }
