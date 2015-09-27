@@ -18,7 +18,6 @@ public class SoldierSeek : BaseState<Soldier>
 		SeekPoint = seekPoint;
 		NPC.MaxSpeed = 1f;
 		npcPath = new NpcPath(NPC);
-        npcPath.SetLastDestination(NPC.transform.position);
 	}
 
 	private Vector3 GetSteeringForce()
@@ -44,9 +43,7 @@ public class SoldierSeek : BaseState<Soldier>
 	{
 		base.Update();
 
-	    if (npcPath.HasDestinationChanged(SeekPoint))
-	        npcPath.SetDestination(SeekPoint);
-        npcPath.Update();
+        npcPath.Update(SeekPoint);
 	    useArriveForce = npcPath.IsFinalPathPoint();
 		
 		NPC.Velocity += GetSteeringForce() * Time.deltaTime;

@@ -15,17 +15,12 @@ public class NpcPath {
     public NpcPath(MonoBehaviour npc)
     {
         this.npc = npc;
+        lastDestination = NPC.transform.position;
     }
 
     public void SetLastDestination(Vector3 position)
     {
         lastDestination = position;
-    }
-
-    public bool HasDestinationChanged(Vector3 destination)
-    {
-        var deltaDestination = destination - lastDestination;
-        return deltaDestination.sqrMagnitude > 0.1f;
     }
 
     public void SetDestination(Vector3 destination)
@@ -43,8 +38,14 @@ public class NpcPath {
         }
     }
 
-    public void Update()
+    public void Update(Vector3 destination)
     {
+        var deltaDestination = destination - lastDestination;
+        if (deltaDestination.sqrMagnitude > 0.1f)
+        {
+            SetDestination(destination);
+        }
+
         var toCurPathPos = AtHeight(path[curPathIndex], 0f) - AtHeight(NPC.transform.position, 0f);
         if (toCurPathPos.sqrMagnitude < 0.1f)
         {
