@@ -12,7 +12,7 @@ public class SoldierIdle : BaseState<Soldier>
 	{
 		if (NPC.Target != null)
 		{
-			NPC.State = new SoldierChase(NPC);
+			NPC.State = new SoldierSeek(NPC, NPC.Target.transform.position);
 		}
 		base.Update();
 	}

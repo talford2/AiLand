@@ -24,28 +24,8 @@ public class Soldier : MonoBehaviour
 	void Awake()
 	{
 		Steering = new SoldierSteering(this);
-
 		sightSensor = GetComponent<SightSensor>();
-		sightSensor.SeeTarget += SeeTarget;
-
 		hearingSensor = GetComponent<HearingSensor>();
-		hearingSensor.HearTarget += HearTarget;
-	}
-
-	private void SeeTarget(Transform target)
-	{
-		if (Target == null)
-		{
-			Debug.Log("I saw something, I'm going to chase it");
-			Target = target;
-			targetExpirationCooldown = TargetExpirationTime;
-			State = new SoldierChase(this);
-		}
-	}
-
-	private void HearTarget(Transform target)
-	{
-		Debug.Log("I heard something.");
 	}
 
 	void Start()
