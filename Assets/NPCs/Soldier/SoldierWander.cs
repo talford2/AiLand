@@ -34,6 +34,16 @@ public class SoldierWander : BaseState<Soldier>
 		return steerForce;
 	}
 
+    public override void SeeTarget(Transform target)
+    {
+        NPC.State = new SoldierChase(NPC, target);
+    }
+
+    public override void HearTarget(Transform target)
+    {
+        NPC.State = new SoldierSeek(NPC, target.position);
+    }
+
     private Vector3 GetWanderPosition()
     {
         var wanderDistance = 10f;
