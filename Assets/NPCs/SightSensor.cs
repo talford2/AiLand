@@ -43,13 +43,7 @@ public class SightSensor : MonoBehaviour
 		StartCoroutine(Detect(DetectFrequency));
 	}
 
-	private void Update()
-	{
-		Debug.DrawRay(TransformObject.position, TransformObject.forward * Distance, Color.yellow);
-		Debug.DrawLine(TransformObject.position, TransformObject.forward * Distance, Color.red);
-	}
-
-	private void OnDrawGizmosSelected()
+	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.white;
 		Gizmos.DrawWireSphere(TransformObject.position, Distance);
