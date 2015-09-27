@@ -31,6 +31,9 @@ public class SoldierShootAttack : BaseState<Soldier>
         }
         base.Update();
 
+        var targetForward = Utility.AtHeight(attackTarget.position, 0f) - Utility.AtHeight(NPC.transform.position, 0f);
+        NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f * Time.deltaTime);
+
         attackCooldown -= Time.deltaTime;
         if (attackCooldown <= 0)
         {
