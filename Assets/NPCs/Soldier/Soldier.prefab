@@ -1298,8 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
-  TargetExpirationTime: 2
-  Target: {fileID: 0}
+  ShootAttackRadius: 6
 --- !u!114 &11418886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1426,6 +1425,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: FieldOfView
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ShootAttackRadius
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
