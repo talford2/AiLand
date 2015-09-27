@@ -2,7 +2,9 @@
 
 public class SoldierChase : BaseState<Soldier>
 {
-	public float TargetExpirationTime = 1;
+    private Transform chaseTarget;
+    
+    public float TargetExpirationTime = 1;
 
 	private float targetExpirationCooldown = 0;
 
@@ -13,7 +15,7 @@ public class SoldierChase : BaseState<Soldier>
 	public SoldierChase(Soldier npc, Transform chaseTransform) : base(npc)
 	{
 		Debug.Log("Chase");
-		NPC.Target = chaseTransform;
+		chaseTarget = chaseTransform;
 		npcPath = new NpcPath(NPC);
 		targetExpirationCooldown = TargetExpirationTime;
 	}
@@ -41,13 +43,13 @@ public class SoldierChase : BaseState<Soldier>
 	{
 		base.Update();
 
-		if (NPC.Target != null && !NPC.IsDistanceGreaterThan(NPC.ShootAttackRadius))
+		if (chaseTarget != null && !NPC.IsDistanceGreaterThan(chaseTarget.position, NPC.ShootAttackRadius))
 		{
-			NPC.State = new SoldierShootAttack(NPC);
+			NPC.State = new SoldierShootAttack(NPC, chaseTarget);
 			return;
 		}
 
-		npcPath.Update(NPC.Target.position);
+		npcPath.Update(chaseTarget.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
 		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
@@ -62,15 +64,15 @@ public class SoldierChase : BaseState<Soldier>
 		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
 		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
 
-		npcPath.SetLastDestination(NPC.Target.position);
+		npcPath.SetLastDestination(chaseTarget.position);
 
 
 		// Target expires start seeking
 		targetExpirationCooldown -= Time.deltaTime;
 		if (targetExpirationCooldown <= 0)
 		{
-			var lastSeenPoint = NPC.Target.position;
-			NPC.Target = null;
+			var lastSeenPoint = chaseTarget.position;
+			chaseTarget = null;
 			NPC.State = new SoldierSeek(NPC, lastSeenPoint);
 		}
 
@@ -79,7 +81,7 @@ public class SoldierChase : BaseState<Soldier>
 	public override void SeeTarget(Transform target)
 	{
 		targetExpirationCooldown = TargetExpirationTime;
-		NPC.Target = target;
+		chaseTarget = target;
 		base.SeeTarget(target);
 	}
 }

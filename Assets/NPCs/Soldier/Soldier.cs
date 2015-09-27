@@ -14,8 +14,6 @@ public class Soldier : MonoBehaviour
 
 	private HearingSensor hearingSensor;
 
-	public Transform Target;
-
 	public float ShootAttackRadius = 3;
 
 	public float MaxSpeed { get; set; }
@@ -46,9 +44,9 @@ public class Soldier : MonoBehaviour
 		}
 	}
 
-	public bool IsDistanceGreaterThan(float distance)
+	public bool IsDistanceGreaterThan(Vector3 position, float distance)
 	{
-		return (Target.position - transform.position).sqrMagnitude > (distance * distance);
+		return (position - transform.position).sqrMagnitude > (distance * distance);
 	}
 
 	void Start()
