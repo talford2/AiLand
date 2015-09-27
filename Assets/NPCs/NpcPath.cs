@@ -15,7 +15,8 @@ public class NpcPath {
     public NpcPath(MonoBehaviour npc)
     {
         this.npc = npc;
-        lastDestination = NPC.transform.position;
+        SetLastDestination(NPC.transform.position);
+        SetDestination(NPC.transform.position);
     }
 
     public void SetLastDestination(Vector3 position)
@@ -44,6 +45,7 @@ public class NpcPath {
         if (deltaDestination.sqrMagnitude > 0.1f)
         {
             SetDestination(destination);
+            isFinalPoint = false;
         }
 
         var toCurPathPos = AtHeight(path[curPathIndex], 0f) - AtHeight(NPC.transform.position, 0f);
@@ -53,7 +55,6 @@ public class NpcPath {
             isFinalPoint = curPathIndex >= path.Length - 1;
         }
 
-        // Arrive and avoid out of range indexes.
         if (curPathIndex > path.Length - 1)
         {
             Debug.Log("DESTINATION REACHED!");

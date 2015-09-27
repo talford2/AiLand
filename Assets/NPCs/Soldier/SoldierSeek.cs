@@ -2,11 +2,7 @@
 
 public class SoldierSeek : BaseState<Soldier>
 {
-	//private Vector3 lastTargetPosition;
-	//private Vector3[] path;
-	//private int curPathIndex;
-
-    private NpcPath npcPath;
+    private readonly NpcPath npcPath;
 
 	private bool useArriveForce;
 
