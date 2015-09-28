@@ -43,12 +43,12 @@ public class SoldierWander : BaseState<Soldier>
 		return steerForce;
 	}
 
-    public void SeeTarget(Transform target)
+    private void SeeTarget(Transform target)
     {
         NPC.State = new SoldierChase(NPC, target);
     }
 
-    public void HearTarget(Transform target)
+    private void HearTarget(Transform target)
     {
         NPC.State = new SoldierSeek(NPC, target.position);
     }

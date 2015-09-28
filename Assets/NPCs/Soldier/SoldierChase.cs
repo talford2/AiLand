@@ -101,7 +101,7 @@ public class SoldierChase : BaseState<Soldier>
 
     }
 
-    public void SeeTarget(Transform target)
+    private void SeeTarget(Transform target)
 	{
 		targetExpirationCooldown = TargetExpirationTime;
 		chaseTarget = target;

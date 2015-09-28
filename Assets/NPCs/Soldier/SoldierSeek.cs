@@ -45,12 +45,12 @@ public class SoldierSeek : BaseState<Soldier>
 		return steerForce;
 	}
 
-    public void SeeTarget(Transform target)
+    private void SeeTarget(Transform target)
 	{
 		NPC.State = new SoldierChase(NPC, target);
 	}
 
-	public void HearTarget(Transform target)
+	private void HearTarget(Transform target)
 	{
 		SeekPoint = target.position;
 	}
