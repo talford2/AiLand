@@ -46,6 +46,6 @@ public class Soldier : BaseNPC
     public override void NPCUpdate()
     {
         base.NPCUpdate();
-        Speed = Mathf.Lerp(Speed, TargetSpeed, Time.deltaTime);
+        Speed = Mathf.Lerp(Speed, TargetSpeed, 2f*Time.deltaTime);
     }
 }
