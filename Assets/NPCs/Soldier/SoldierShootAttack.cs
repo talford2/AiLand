@@ -10,10 +10,22 @@ public class SoldierShootAttack : BaseState<Soldier>
     {
         Debug.Log("Shoot");
         attackTarget = target;
-        NPC.AnimationController.SetBool("IsAim", true);
-        NPC.AnimationController.SetFloat("Speed", 0);
-        NPC.AnimationController.SetFloat("VerticalSpeed", 0);
-        NPC.AnimationController.SetFloat("HorizontalSpeed", 0);
+    }
+
+    private Vector3 GetSteeringForce()
+    {
+        var sqrMaxSpeed = NPC.Speed*NPC.Speed;
+        var steerForce = Vector3.zero;
+
+        steerForce += NPC.Steering.ArriveForce(attackTarget.position);
+        if (steerForce.sqrMagnitude > sqrMaxSpeed)
+            return NPC.Speed*steerForce.normalized;
+
+        steerForce += NPC.Steering.SeekForce(attackTarget.position);
+        if (steerForce.sqrMagnitude > sqrMaxSpeed)
+            return NPC.Speed*steerForce.normalized;
+
+        return steerForce;
     }
 
     public override void UpdateState()
@@ -31,7 +43,16 @@ public class SoldierShootAttack : BaseState<Soldier>
         }
 
         var targetForward = Utility.AtHeight(attackTarget.position, 0f) - Utility.AtHeight(NPC.transform.position, 0f);
-        NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f * Time.deltaTime);
+        NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f*Time.deltaTime);
+
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.0f, Time.deltaTime);
+        NPC.Velocity += GetSteeringForce()*Time.deltaTime;
+
+        // Locomotion
+        NPC.AnimationController.SetBool("IsAim", true);
+        NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
+        NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized*NPC.Speed, NPC.transform.right));
+        NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized*NPC.Speed, NPC.transform.forward));
 
         attackCooldown -= Time.deltaTime;
         if (attackCooldown <= 0)

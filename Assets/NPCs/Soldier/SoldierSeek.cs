@@ -87,8 +87,8 @@ public class SoldierSeek : BaseState<Soldier>
 		NPC.AnimationController.SetBool("IsAim", true);
 		NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
 
-		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
-		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
+        NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
+        NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.forward));
 
 		npcPath.SetLastDestination(SeekPoint);
 	}

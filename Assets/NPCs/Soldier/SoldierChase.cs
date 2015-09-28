@@ -84,8 +84,8 @@ public class SoldierChase : BaseState<Soldier>
 		NPC.AnimationController.SetBool("IsAim", false);
 		NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
 
-		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward, NPC.transform.right));
-		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward, NPC.transform.forward));
+        NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
+        NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.forward));
 
 		npcPath.SetLastDestination(chaseTarget.position);
 
