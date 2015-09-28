@@ -103,7 +103,7 @@ public class SoldierWander : BaseState<Soldier>
         var targetForward = Utility.AtHeight(npcPath.GetCurrentPathTargetPosition(), 0f) - Utility.AtHeight(NPC.transform.position, 0f);
 
         NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f*Time.deltaTime);
-        NPC.AnimationController.SetBool("IsAim", true);
+        NPC.AnimationController.SetBool("IsAim", false);
         NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
 
         NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
