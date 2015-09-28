@@ -8,10 +8,20 @@ public class SoldierSeek : BaseState<Soldier>
 
 	private Vector3 SeekPoint;
 
+    private float seeInterval;
+    private float seeCooldown;
+
+    private float hearInterval;
+    private float hearCooldown;
+
 	public SoldierSeek(Soldier npc, Vector3 seekPoint) : base(npc)
 	{
 		Debug.Log("Seek");
 		SeekPoint = seekPoint;
+
+	    seeInterval = 0.3f;
+	    hearInterval = 0.3f;
+
 		NPC.MaxSpeed = 1f;
 		npcPath = new NpcPath(NPC);
 	}
@@ -35,21 +45,39 @@ public class SoldierSeek : BaseState<Soldier>
 		return steerForce;
 	}
 
-	public override void SeeTarget(Transform target)
+    public void SeeTarget(Transform target)
 	{
 		NPC.State = new SoldierChase(NPC, target);
 	}
 
-	public override void HearTarget(Transform target)
+	public void HearTarget(Transform target)
 	{
 		SeekPoint = target.position;
 	}
+
+    private void CheckSensors()
+    {
+        seeCooldown -= Time.deltaTime;
+        if (seeCooldown < 0f)
+        {
+            NPC.SightSensor.Detect(SeeTarget);
+            seeCooldown = seeInterval;
+        }
+        hearCooldown -= Time.deltaTime;
+        if (hearCooldown < 0f)
+        {
+            NPC.HearingSensor.Detect(HearTarget);
+            hearCooldown = hearInterval;
+        }
+    }
 
 	public override void Update()
 	{
 		base.Update();
 
-		npcPath.Update(SeekPoint);
+        CheckSensors();
+
+	    npcPath.Update(SeekPoint);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
 		NPC.Velocity += GetSteeringForce() * Time.deltaTime;

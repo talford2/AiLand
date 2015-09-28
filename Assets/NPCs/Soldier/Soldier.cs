@@ -10,9 +10,9 @@ public class Soldier : MonoBehaviour
 
 	public Vector3 Velocity { get; set; }
 
-	private SightSensor sightSensor;
+	public SightSensor SightSensor { get; set; }
 
-	private HearingSensor hearingSensor;
+	public HearingSensor HearingSensor;
 
 	public float ShootAttackRadius = 3;
 
@@ -21,27 +21,8 @@ public class Soldier : MonoBehaviour
 	void Awake()
 	{
 		Steering = new SoldierSteering(this);
-		sightSensor = GetComponent<SightSensor>();
-		hearingSensor = GetComponent<HearingSensor>();
-
-		sightSensor.SeeTarget += SeeTarget;
-		hearingSensor.HearTarget += HearTarget;
-	}
-
-	private void HearTarget(Transform target)
-	{
-		if (State != null)
-		{
-			State.HearTarget(target);
-		}
-	}
-
-	private void SeeTarget(Transform target)
-	{
-		if (State != null)
-		{
-			State.SeeTarget(target);
-		}
+		SightSensor = GetComponent<SightSensor>();
+		HearingSensor = GetComponent<HearingSensor>();
 	}
 
 	public bool IsDistanceGreaterThan(Vector3 position, float distance)

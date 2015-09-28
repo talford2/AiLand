@@ -3,6 +3,9 @@
 public class SoldierChase : BaseState<Soldier>
 {
     private Transform chaseTarget;
+
+    private float seeInterval;
+    private float seeCooldown;
     
     public float TargetExpirationTime = 1;
 
@@ -18,6 +21,7 @@ public class SoldierChase : BaseState<Soldier>
 		chaseTarget = chaseTransform;
 		npcPath = new NpcPath(NPC);
 		targetExpirationCooldown = TargetExpirationTime;
+	    seeInterval = 0.3f;
 	}
 
 	private Vector3 GetSteeringForce()
@@ -39,9 +43,21 @@ public class SoldierChase : BaseState<Soldier>
 		return steerForce;
 	}
 
+    private void CheckSensors()
+    {
+        seeCooldown -= Time.deltaTime;
+        if (seeCooldown < 0f)
+        {
+            NPC.SightSensor.Detect(SeeTarget);
+            seeCooldown = seeInterval;
+        }
+    }
+
     public override void Update()
     {
         base.Update();
+
+        CheckSensors();
 
         if (chaseTarget != null && !NPC.IsDistanceGreaterThan(chaseTarget.position, NPC.ShootAttackRadius))
         {
@@ -85,10 +101,9 @@ public class SoldierChase : BaseState<Soldier>
 
     }
 
-    public override void SeeTarget(Transform target)
+    public void SeeTarget(Transform target)
 	{
 		targetExpirationCooldown = TargetExpirationTime;
 		chaseTarget = target;
-		base.SeeTarget(target);
 	}
 }

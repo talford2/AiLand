@@ -2,18 +2,27 @@
 
 public class SoldierWander : BaseState<Soldier>
 {
+    private float hearInterval;
+    private float hearCooldown;
+
+    private float seeInterval;
+    private float seeCooldown;
+
     private bool useArriveForce;
 
     private readonly NpcPath npcPath;
 
     private Vector3 wanderDestination;
 
-	public SoldierWander(Soldier npc) : base(npc)
-	{
-		Debug.Log("Wander");
-	    wanderDestination = GetWanderPosition();
+    public SoldierWander(Soldier npc) : base(npc)
+    {
+        Debug.Log("Wander");
+        wanderDestination = GetWanderPosition();
         npcPath = new NpcPath(NPC);
-	}
+
+        hearInterval = 0.3f;
+        seeInterval = 0.3f;
+    }
 
     private Vector3 GetSteeringForce()
 	{
@@ -34,12 +43,12 @@ public class SoldierWander : BaseState<Soldier>
 		return steerForce;
 	}
 
-    public override void SeeTarget(Transform target)
+    public void SeeTarget(Transform target)
     {
         NPC.State = new SoldierChase(NPC, target);
     }
 
-    public override void HearTarget(Transform target)
+    public void HearTarget(Transform target)
     {
         NPC.State = new SoldierSeek(NPC, target.position);
     }
@@ -62,8 +71,28 @@ public class SoldierWander : BaseState<Soldier>
         return wanderPosition;
     }
 
+    private void CheckSensors()
+    {
+        seeCooldown -= Time.deltaTime;
+        if (seeCooldown < 0f)
+        {
+            NPC.SightSensor.Detect(SeeTarget);
+            seeCooldown = seeInterval;
+        }
+        hearCooldown -= Time.deltaTime;
+        if (hearCooldown < 0f)
+        {
+            NPC.HearingSensor.Detect(HearTarget);
+            hearCooldown = hearInterval;
+        }
+    }
+
     public override void Update()
     {
+        base.Update();
+
+        CheckSensors();
+
         npcPath.Update(wanderDestination);
 
         useArriveForce = npcPath.IsFinalPathPoint();

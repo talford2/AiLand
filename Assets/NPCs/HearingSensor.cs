@@ -1,34 +1,19 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 public class HearingSensor : MonoBehaviour
 {
 	public float Distance;
-	public float DetectFrequency;
 
-	public event Action<Transform> HearTarget;
-
-	private void Start()
-	{
-		StartCoroutine(Detect(1f));
-	}
-
-	private IEnumerator Detect(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		//Debug.Log("LISTEN");
-		var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
-		foreach (var detected in detectedObjects)
-		{
-			Debug.Log("DETECTED: " + detected.name);
-			if (HearTarget != null)
-			{
-				HearTarget(detected.transform);
-			}
-		}
-		StartCoroutine(Detect(DetectFrequency));
-	}
+    public void Detect(Action<Transform> action)
+    {
+        var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
+        foreach (var detected in detectedObjects)
+        {
+            Debug.Log("DETECTED: " + detected.name);
+            action(detected.transform);
+        }
+    }
 
 	private void OnDrawGizmos()
 	{
