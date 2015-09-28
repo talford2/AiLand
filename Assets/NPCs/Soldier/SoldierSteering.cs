@@ -8,7 +8,7 @@ public class SoldierSteering : BaseState<Soldier>
 
     public Vector3 SeekForce(Vector3 position)
     {
-        var desiredVelocity = (position - NPC.transform.position).normalized*NPC.MaxSpeed;
+        var desiredVelocity = (position - NPC.transform.position).normalized*NPC.Speed;
         return desiredVelocity - NPC.Velocity;
     }
 
@@ -20,7 +20,7 @@ public class SoldierSteering : BaseState<Soldier>
         if (distance > 0f)
         {
             var speed = distance / deceleration;
-            speed = Mathf.Min(speed, NPC.MaxSpeed);
+            speed = Mathf.Min(speed, NPC.Speed);
             var desiredVelocity = toPosition * speed / distance;
             return desiredVelocity - NPC.Velocity;
         }

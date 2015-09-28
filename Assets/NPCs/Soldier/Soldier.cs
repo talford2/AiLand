@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Soldier : BaseNPC
 {
@@ -17,7 +16,7 @@ public class Soldier : BaseNPC
 
 	public float ShootAttackRadius = 3;
 
-	public float MaxSpeed { get; set; }
+	public float Speed { get; set; }
 
 	void Awake()
 	{

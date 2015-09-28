@@ -22,25 +22,24 @@ public class SoldierSeek : BaseState<Soldier>
 	    seeInterval = 0.3f;
 	    hearInterval = 0.3f;
 
-		NPC.MaxSpeed = 1f;
 		npcPath = new NpcPath(NPC);
 	}
 
 	private Vector3 GetSteeringForce()
 	{
-		var sqrMaxSpeed = NPC.MaxSpeed * NPC.MaxSpeed;
+		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
 
 		if (useArriveForce)
 		{
 			steerForce += NPC.Steering.ArriveForce(npcPath.GetCurrentPathTargetPosition());
 			if (steerForce.sqrMagnitude > sqrMaxSpeed)
-				return NPC.MaxSpeed * steerForce.normalized;
+				return NPC.Speed * steerForce.normalized;
 		}
 
 		steerForce += NPC.Steering.SeekForce(npcPath.GetCurrentPathTargetPosition());
 		if (steerForce.sqrMagnitude > sqrMaxSpeed)
-			return NPC.MaxSpeed * steerForce.normalized;
+			return NPC.Speed * steerForce.normalized;
 
 		return steerForce;
 	}
@@ -74,6 +73,8 @@ public class SoldierSeek : BaseState<Soldier>
 	public override void UpdateState()
 	{
         CheckSensors();
+
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
 
 	    npcPath.Update(SeekPoint);
 		useArriveForce = npcPath.IsFinalPathPoint();

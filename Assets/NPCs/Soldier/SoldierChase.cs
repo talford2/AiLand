@@ -26,19 +26,19 @@ public class SoldierChase : BaseState<Soldier>
 
 	private Vector3 GetSteeringForce()
 	{
-		var sqrMaxSpeed = NPC.MaxSpeed * NPC.MaxSpeed;
+		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
 
 		if (useArriveForce)
 		{
 			steerForce += NPC.Steering.ArriveForce(npcPath.GetCurrentPathTargetPosition());
 			if (steerForce.sqrMagnitude > sqrMaxSpeed)
-				return NPC.MaxSpeed * steerForce.normalized;
+				return NPC.Speed * steerForce.normalized;
 		}
 
 		steerForce += NPC.Steering.SeekForce(npcPath.GetCurrentPathTargetPosition());
 		if (steerForce.sqrMagnitude > sqrMaxSpeed)
-			return NPC.MaxSpeed * steerForce.normalized;
+			return NPC.Speed * steerForce.normalized;
 
 		return steerForce;
 	}
@@ -62,6 +62,8 @@ public class SoldierChase : BaseState<Soldier>
 			NPC.State = new SoldierShootAttack(NPC, chaseTarget);
 			return;
 		}
+
+	    NPC.Speed = Mathf.Lerp(NPC.Speed, 1.0f, Time.deltaTime);
 
 		npcPath.Update(chaseTarget.position);
 		useArriveForce = npcPath.IsFinalPathPoint();

@@ -23,4 +23,10 @@ public class SoldierIdle : BaseState<Soldier>
 		NPC.SightSensor.Detect(SeeTarget);
 		NPC.HearingSensor.Detect(HearTarget);
 	}
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.0f, Time.deltaTime);
+    }
 }
