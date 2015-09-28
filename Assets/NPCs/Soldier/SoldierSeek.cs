@@ -74,12 +74,11 @@ public class SoldierSeek : BaseState<Soldier>
 	{
         CheckSensors();
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
-
 	    npcPath.Update(SeekPoint);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
-		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
+        NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion
 		var targetForward = Utility.AtHeight(npcPath.GetCurrentPathTargetPosition(), 0f) - Utility.AtHeight(NPC.transform.position, 0f);

@@ -91,12 +91,11 @@ public class SoldierWander : BaseState<Soldier>
     {
         CheckSensors();
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
-
         npcPath.Update(wanderDestination);
 
         useArriveForce = npcPath.IsFinalPathPoint();
 
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
         NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
         // Locomotion

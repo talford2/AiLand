@@ -63,12 +63,11 @@ public class SoldierChase : BaseState<Soldier>
 			return;
 		}
 
-	    NPC.Speed = Mathf.Lerp(NPC.Speed, 1.0f, Time.deltaTime);
-
 		npcPath.Update(chaseTarget.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
-		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
+        NPC.Speed = Mathf.Lerp(NPC.Speed, 1.0f, Time.deltaTime);
+        NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion
 		Vector3 targetForward;
