@@ -568,6 +568,7 @@ GameObject:
   - 114: {fileID: 11403054}
   - 114: {fileID: 11486614}
   - 114: {fileID: 11418886}
+  - 114: {fileID: 11480740}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -1298,6 +1299,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
+  HearingSensor: {fileID: 0}
   ShootAttackRadius: 6
 --- !u!114 &11418886
 MonoBehaviour:
@@ -1311,7 +1313,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Distance: 30
-  DetectFrequency: .300000012
+--- !u!114 &11480740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ec159c706efcf64cb2b3ae7971f9a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 0
 --- !u!114 &11486614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1325,7 +1338,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Distance: 10
   FieldOfView: 60
-  DetectFrequency: .300000012
   TransformObject: {fileID: 483288}
 --- !u!137 &13789082
 SkinnedMeshRenderer:
