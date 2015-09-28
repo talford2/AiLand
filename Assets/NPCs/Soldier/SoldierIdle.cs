@@ -10,15 +10,31 @@ public class SoldierIdle : BaseState<Soldier>
 	    NPC.TargetSpeed = 0f;
 	}
 
-	private void SeeTarget(Transform target)
-	{
-		NPC.State = new SoldierChase(NPC, target);
-	}
+    private void SeeTarget(Transform target)
+    {
+        // TODO: Do this more efficiently
+        var npcTarget = target.GetComponentInParent<NpcTarget>();
+        if (npcTarget != null)
+        {
+            if (npcTarget.Team != NPC.GetComponent<NpcTarget>().Team)
+            {
+                NPC.State = new SoldierChase(NPC, target);
+            }
+        }
+    }
 
-	private void HearTarget(Transform target)
-	{
-		NPC.State = new SoldierSeek(NPC, target.position);
-	}
+    private void HearTarget(Transform target)
+    {
+        // TODO: Do this more efficiently
+        var npcTarget = target.GetComponentInParent<NpcTarget>();
+        if (npcTarget != null)
+        {
+            if (npcTarget.Team != NPC.GetComponent<NpcTarget>().Team)
+            {
+                NPC.State = new SoldierSeek(NPC, target.position);
+            }
+        }
+    }
 
 	public override void IntervalUpdate()
 	{
