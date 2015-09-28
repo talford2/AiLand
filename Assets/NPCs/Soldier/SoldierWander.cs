@@ -22,6 +22,8 @@ public class SoldierWander : BaseState<Soldier>
 
         hearInterval = 0.3f;
         seeInterval = 0.3f;
+
+        NPC.TargetSpeed = 0.5f;
     }
 
     private Vector3 GetSteeringForce()
@@ -95,7 +97,6 @@ public class SoldierWander : BaseState<Soldier>
 
         useArriveForce = npcPath.IsFinalPathPoint();
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
         NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
         // Locomotion

@@ -18,6 +18,8 @@ public class Soldier : BaseNPC
 
 	public float Speed { get; set; }
 
+    public float TargetSpeed { get; set; }
+
 	void Awake()
 	{
 		Steering = new SoldierSteering(this);
@@ -40,4 +42,10 @@ public class Soldier : BaseNPC
 	{
 		return State;
 	}
+
+    public override void NPCUpdate()
+    {
+        base.NPCUpdate();
+        Speed = Mathf.Lerp(Speed, TargetSpeed, Time.deltaTime);
+    }
 }

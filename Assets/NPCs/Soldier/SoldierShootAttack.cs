@@ -10,6 +10,8 @@ public class SoldierShootAttack : BaseState<Soldier>
     {
         Debug.Log("Shoot");
         attackTarget = target;
+
+        NPC.TargetSpeed = 0f;
     }
 
     private Vector3 GetSteeringForce()
@@ -45,7 +47,6 @@ public class SoldierShootAttack : BaseState<Soldier>
         var targetForward = Utility.AtHeight(attackTarget.position, 0f) - Utility.AtHeight(NPC.transform.position, 0f);
         NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f*Time.deltaTime);
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.0f, Time.deltaTime);
         NPC.Velocity += GetSteeringForce()*Time.deltaTime;
 
         // Locomotion

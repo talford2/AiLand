@@ -22,6 +22,8 @@ public class SoldierChase : BaseState<Soldier>
 		npcPath = new NpcPath(NPC);
 		targetExpirationCooldown = TargetExpirationTime;
 		seeInterval = 0.3f;
+
+	    NPC.TargetSpeed = 1.0f;
 	}
 
 	private Vector3 GetSteeringForce()
@@ -66,7 +68,6 @@ public class SoldierChase : BaseState<Soldier>
 		npcPath.Update(chaseTarget.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 1.0f, Time.deltaTime);
         NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion

@@ -6,6 +6,8 @@ public class SoldierIdle : BaseState<Soldier>
 	{
 		Debug.Log("Idle");
 		IntervalTime = 0.3f;
+
+	    NPC.TargetSpeed = 0f;
 	}
 
 	private void SeeTarget(Transform target)

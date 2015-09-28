@@ -23,6 +23,8 @@ public class SoldierSeek : BaseState<Soldier>
 	    hearInterval = 0.3f;
 
 		npcPath = new NpcPath(NPC);
+
+	    NPC.TargetSpeed = 0.5f;
 	}
 
 	private Vector3 GetSteeringForce()
@@ -77,7 +79,6 @@ public class SoldierSeek : BaseState<Soldier>
 	    npcPath.Update(SeekPoint);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
-        NPC.Speed = Mathf.Lerp(NPC.Speed, 0.5f, Time.deltaTime);
         NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion
