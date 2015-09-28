@@ -16,7 +16,7 @@ public class SoldierShootAttack : BaseState<Soldier>
         NPC.AnimationController.SetFloat("HorizontalSpeed", 0);
     }
 
-    public override void Update()
+    public override void UpdateState()
     {
         if (NPC.IsDistanceGreaterThan(attackTarget.position, NPC.ShootAttackRadius))
         {
@@ -29,7 +29,6 @@ public class SoldierShootAttack : BaseState<Soldier>
                 NPC.State = new SoldierIdle(NPC);
             }
         }
-        base.Update();
 
         var targetForward = Utility.AtHeight(attackTarget.position, 0f) - Utility.AtHeight(NPC.transform.position, 0f);
         NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f * Time.deltaTime);

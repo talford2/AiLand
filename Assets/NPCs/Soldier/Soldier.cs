@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class Soldier : MonoBehaviour
+public class Soldier : BaseNPC
 {
 	public BaseState<Soldier> State { get; set; }
 
@@ -33,11 +34,11 @@ public class Soldier : MonoBehaviour
 	void Start()
 	{
 		//State = new SoldierIdle(this);
-        State = new SoldierWander(this);
+		State = new SoldierWander(this);
 	}
 
-	void Update()
+	public override IState GetState()
 	{
-		State.Update();
+		return State;
 	}
 }

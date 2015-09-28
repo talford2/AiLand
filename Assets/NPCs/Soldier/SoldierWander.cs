@@ -87,10 +87,8 @@ public class SoldierWander : BaseState<Soldier>
         }
     }
 
-    public override void Update()
+    public override void UpdateState()
     {
-        base.Update();
-
         CheckSensors();
 
         npcPath.Update(wanderDestination);
