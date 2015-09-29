@@ -1,11 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SoldierChase : BaseState<Soldier>
 {
 	private Transform chaseTarget;
 
+    private float neighborInterval;
+    private float neighborCooldown;
+
 	private float seeInterval;
 	private float seeCooldown;
+
+    private List<Transform> neighbors;
 
 	public float TargetExpirationTime = 1;
 
@@ -20,8 +26,11 @@ public class SoldierChase : BaseState<Soldier>
 		Debug.Log("Chase");
 		chaseTarget = chaseTransform;
 		npcPath = new NpcPath(NPC);
+        neighbors = new List<Transform>();
+
 		targetExpirationCooldown = TargetExpirationTime;
-		seeInterval = 0.3f;
+        neighborInterval = 0.1f;
+        seeInterval = 0.3f;
 
 		NPC.TargetSpeed = 1.0f;
 	}
@@ -31,7 +40,11 @@ public class SoldierChase : BaseState<Soldier>
 		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
 
-		if (useArriveForce)
+        steerForce += NPC.Steering.SeparationForce(neighbors, NPC.NeighborSensor.Distance);
+	    if (steerForce.sqrMagnitude > sqrMaxSpeed)
+            return NPC.Speed * steerForce.normalized;
+
+	    if (useArriveForce)
 		{
 			steerForce += NPC.Steering.ArriveForce(npcPath.GetCurrentPathTargetPosition());
 			if (steerForce.sqrMagnitude > sqrMaxSpeed)
@@ -47,6 +60,13 @@ public class SoldierChase : BaseState<Soldier>
 
 	private void CheckSensors()
 	{
+        neighborCooldown -= Time.deltaTime;
+        if (neighborCooldown < 0f)
+        {
+            neighbors = new List<Transform>();
+            NPC.NeighborSensor.Detect(DetectNeighbor);
+            neighborCooldown = neighborInterval;
+        }
 		seeCooldown -= Time.deltaTime;
 		if (seeCooldown < 0f)
 		{
@@ -106,6 +126,15 @@ public class SoldierChase : BaseState<Soldier>
 		}
 
 	}
+
+    private void DetectNeighbor(Transform target)
+    {
+        if (target != NPC.transform)
+        {
+            if (!neighbors.Contains(target))
+                neighbors.Add(target);
+        }
+    }
 
 	private void SeeTarget(Transform target)
 	{

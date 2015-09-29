@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SoldierSeek : BaseState<Soldier>
 {
@@ -8,21 +9,28 @@ public class SoldierSeek : BaseState<Soldier>
 
 	private Vector3 SeekPoint;
 
+    private float neighborInterval;
+    private float neighborCooldown;
+
     private float seeInterval;
     private float seeCooldown;
 
     private float hearInterval;
     private float hearCooldown;
 
+    private List<Transform> neighbors;
+
 	public SoldierSeek(Soldier npc, Vector3 seekPoint) : base(npc)
 	{
 		Debug.Log("Seek");
 		SeekPoint = seekPoint;
 
+	    neighborInterval = 0.1f;
 	    seeInterval = 0.3f;
 	    hearInterval = 0.3f;
 
 		npcPath = new NpcPath(NPC);
+        neighbors = new List<Transform>();
 
 	    NPC.TargetSpeed = 0.5f;
 	}
@@ -31,6 +39,10 @@ public class SoldierSeek : BaseState<Soldier>
 	{
 		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
+
+	    steerForce += NPC.Steering.SeparationForce(neighbors, NPC.NeighborSensor.Distance);
+        if (steerForce.sqrMagnitude > sqrMaxSpeed)
+            return NPC.Speed * steerForce.normalized;
 
 		if (useArriveForce)
 		{
@@ -46,6 +58,15 @@ public class SoldierSeek : BaseState<Soldier>
 		return steerForce;
 	}
 
+    private void DetectNeighbor(Transform target)
+    {
+        if (target != NPC.transform)
+        {
+            if (!neighbors.Contains(target))
+                neighbors.Add(target);
+        }
+    }
+
     private void SeeTarget(Transform target)
     {
         if (target != NPC.transform)
@@ -54,12 +75,21 @@ public class SoldierSeek : BaseState<Soldier>
 
     private void HearTarget(Transform target)
     {
+        if (!neighbors.Contains(target))
+            neighbors.Add(target);
         if (target != NPC.transform)
             SeekPoint = target.position;
     }
 
     private void CheckSensors()
     {
+        neighborCooldown -= Time.deltaTime;
+        if (neighborCooldown < 0f)
+        {
+            neighbors = new List<Transform>();
+            NPC.NeighborSensor.Detect(DetectNeighbor);
+            neighborCooldown = neighborInterval;
+        }
         seeCooldown -= Time.deltaTime;
         if (seeCooldown < 0f)
         {

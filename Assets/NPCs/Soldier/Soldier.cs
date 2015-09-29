@@ -10,6 +10,8 @@ public class Soldier : BaseNPC
 
 	public Vector3 Velocity { get; set; }
 
+    public NeighborSensor NeighborSensor { get; set; }
+
 	public SightSensor SightSensor { get; set; }
 
 	public HearingSensor HearingSensor { get; set; }
@@ -26,6 +28,7 @@ public class Soldier : BaseNPC
 	void Awake()
 	{
 		Steering = new SoldierSteering(this);
+	    NeighborSensor = GetComponent<NeighborSensor>();
 		SightSensor = GetComponent<SightSensor>();
 		HearingSensor = GetComponent<HearingSensor>();
 	}

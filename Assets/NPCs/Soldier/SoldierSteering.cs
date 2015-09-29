@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SoldierSteering : BaseState<Soldier>
 {
@@ -10,6 +11,24 @@ public class SoldierSteering : BaseState<Soldier>
     {
         var desiredVelocity = (position - NPC.transform.position).normalized*NPC.Speed;
         return desiredVelocity - NPC.Velocity;
+    }
+
+    public Vector3 SeparationForce(List<Transform> neighbors, float distance)
+    {
+        var avoidSum = Vector3.zero;
+        var distSqr = distance*distance;
+        foreach (var neighbor in neighbors)
+        {
+            if (neighbor != null)
+            {
+                var fromNeighbour = NPC.transform.position - neighbor.position;
+                if (fromNeighbour.sqrMagnitude > 0f && fromNeighbour.sqrMagnitude < distSqr)
+                {
+                    avoidSum += NPC.Speed*fromNeighbour.normalized/fromNeighbour.magnitude;
+                }
+            }
+        }
+        return avoidSum;
     }
 
     public Vector3 ArriveForce(Vector3 position)

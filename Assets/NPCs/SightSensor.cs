@@ -21,16 +21,16 @@ public class SightSensor : MonoBehaviour
 				RaycastHit sightHit;
 				if (Physics.Raycast(sightRay, out sightHit, Distance))
 				{
-					Debug.Log(gameObject.name + " SEES " + sightHit.collider.name);
+					//Debug.Log(gameObject.name + " SEES " + sightHit.collider.name);
 
 					if (sightHit.collider == candidate)
 					{
-						Debug.Log("1:::" + gameObject.name + " SEES " + sightHit.collider.name);
+						//Debug.Log("1:::" + gameObject.name + " SEES " + sightHit.collider.name);
 						action(candidate.GetComponent<Detectable>().Target);
 					}
 					else
 					{
-						Debug.Log("2:::" + gameObject.name + " SEES " + sightHit.collider.name);
+						//Debug.Log("2:::" + gameObject.name + " SEES " + sightHit.collider.name);
 						//Debug.Log("SEE else: " + sightHit.collider.name);
 					}
 				}
