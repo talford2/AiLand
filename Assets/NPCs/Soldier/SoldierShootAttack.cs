@@ -61,13 +61,12 @@ public class SoldierShootAttack : BaseState<Soldier>
 			NPC.AnimationController.SetTrigger("Shoot");
 
 			RaycastHit hit;
-			//Physics.SphereCast((NPC.transform.position, NPC.transform.forward, out hit, 50))
-			//if (Physics.Raycast(NPC.transform.position, NPC.transform.forward, out hit, 50))
-			if (Physics.SphereCast(NPC.transform.position, 2, NPC.transform.forward, out hit, 50))
+			if (Physics.SphereCast(NPC.transform.position + Vector3.up, 0.2f, NPC.transform.forward, out hit, 50f))
 			{
-				var soldier = hit.collider.gameObject.GetComponent<Soldier>();
-				if (soldier != null)
+			    var hitDetectable = hit.collider.GetComponent<Detectable>();
+				if (hitDetectable != null)
 				{
+                    var soldier = hitDetectable.Target.GetComponent<Soldier>();
 					soldier.Die();
 				}
 				else

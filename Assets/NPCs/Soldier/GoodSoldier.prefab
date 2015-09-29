@@ -552,7 +552,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 418832}
-  - 135: {fileID: 13598060}
+  - 136: {fileID: 13661740}
   - 114: {fileID: 11456720}
   m_Layer: 8
   m_Name: Detectable
@@ -1417,7 +1417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
-  HearingSensor: {fileID: 0}
   ShootAttackRadius: 6
 --- !u!114 &11418886
 MonoBehaviour:
@@ -1430,7 +1429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd1033b4dc9103478b6030d82a38470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 50
+  Distance: 30
 --- !u!114 &11456720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1466,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcb314ecc7f9b1429ca36b1db5b168d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 20
+  Distance: 60
   FieldOfView: 60
   TransformObject: {fileID: 483288}
 --- !u!124 &12483948
@@ -1476,8 +1475,8 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147006}
   m_Enabled: 1
---- !u!135 &13598060
-SphereCollider:
+--- !u!136 &13661740
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1485,8 +1484,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .5
+  m_Radius: .300000012
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &13789082
 SkinnedMeshRenderer:
