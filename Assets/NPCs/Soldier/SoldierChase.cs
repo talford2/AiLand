@@ -23,7 +23,7 @@ public class SoldierChase : BaseState<Soldier>
 		targetExpirationCooldown = TargetExpirationTime;
 		seeInterval = 0.3f;
 
-	    NPC.TargetSpeed = 1.0f;
+		NPC.TargetSpeed = 1.0f;
 	}
 
 	private Vector3 GetSteeringForce()
@@ -57,6 +57,11 @@ public class SoldierChase : BaseState<Soldier>
 
 	public override void UpdateState()
 	{
+		if (chaseTarget == null)
+		{
+			NPC.State = new SoldierWander(NPC);
+		}
+
 		CheckSensors();
 
 		if (chaseTarget != null && !NPC.IsDistanceGreaterThan(chaseTarget.position, NPC.ShootAttackRadius))
@@ -68,7 +73,7 @@ public class SoldierChase : BaseState<Soldier>
 		npcPath.Update(chaseTarget.position);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
-        NPC.Velocity += GetSteeringForce() * Time.deltaTime;
+		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion
 		Vector3 targetForward;
@@ -85,8 +90,8 @@ public class SoldierChase : BaseState<Soldier>
 		NPC.AnimationController.SetBool("IsAim", false);
 		NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
 
-        NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
-        NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.forward));
+		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
+		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.forward));
 
 		npcPath.SetLastDestination(chaseTarget.position);
 
@@ -103,10 +108,10 @@ public class SoldierChase : BaseState<Soldier>
 
 	private void SeeTarget(Transform target)
 	{
-	    if (target != NPC.transform)
-	    {
-	        targetExpirationCooldown = TargetExpirationTime;
-	        chaseTarget = target;
-	    }
+		if (target != NPC.transform)
+		{
+			targetExpirationCooldown = TargetExpirationTime;
+			chaseTarget = target;
+		}
 	}
 }
