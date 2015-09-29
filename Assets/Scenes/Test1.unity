@@ -2770,7 +2770,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 412328, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 34.2000008
       objectReference: {fileID: 0}
     - target: {fileID: 412328, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2778,7 +2778,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 412328, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -28.7900009
       objectReference: {fileID: 0}
     - target: {fileID: 412328, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3091,6 +3091,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1398315246}
   - 135: {fileID: 1398315247}
+  - 114: {fileID: 1398315248}
   m_Layer: 8
   m_Name: Detectable
   m_TagString: Untagged
@@ -3122,6 +3123,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1398315248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1398315245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac811be4b78e7c46af94ccf1a2ef1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 1609405389}
 --- !u!1 &1402937703
 GameObject:
   m_ObjectHideFlags: 0
