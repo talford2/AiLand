@@ -2041,6 +2041,14 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11486614, guid: 4056f0ada452b374ea54a32f374ea84a, type: 2}
+      propertyPath: Distance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11418886, guid: 4056f0ada452b374ea54a32f374ea84a, type: 2}
+      propertyPath: Distance
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4056f0ada452b374ea54a32f374ea84a, type: 2}
   m_IsPrefabParent: 0
@@ -2799,6 +2807,14 @@ Prefab:
     - target: {fileID: 412328, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11486614, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+      propertyPath: Distance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11418886, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
+      propertyPath: Distance
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47302d45e1401d64e8143ce24e935eaf, type: 2}
