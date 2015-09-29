@@ -65,11 +65,9 @@ public class NpcPath {
         }
 
         // Debug draw path
-        var fromPoint = path[0];
         for (var i = 0; i < path.Length - 1; i++)
         {
-            Debug.DrawLine(fromPoint, path[i + 1], Color.magenta);
-            fromPoint = path[i + 1];
+            Debug.DrawLine(path[i], path[i + 1], Color.magenta);
         }
     }
 
