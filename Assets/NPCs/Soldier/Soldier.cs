@@ -20,6 +20,8 @@ public class Soldier : BaseNPC
 
 	public float TargetSpeed { get; set; }
 
+	public GameObject Corpse;
+
 	void Awake()
 	{
 		Steering = new SoldierSteering(this);
@@ -52,5 +54,11 @@ public class Soldier : BaseNPC
 	public void Die()
 	{
 		Debug.Log(name + " die");
+		if (Corpse != null)
+		{
+			var corpse = Instantiate<GameObject>(Corpse);
+			corpse.transform.position = transform.position;
+		}
+		Destroy(gameObject);
 	}
 }

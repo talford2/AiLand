@@ -32,6 +32,11 @@ public class SoldierShootAttack : BaseState<Soldier>
 
 	public override void UpdateState()
 	{
+		if (attackTarget == null)
+		{
+			NPC.State = new SoldierWander(NPC);
+			return;
+		}
 		if (NPC.IsDistanceGreaterThan(attackTarget.position, NPC.ShootAttackRadius))
 		{
 			if (attackTarget != null)
@@ -63,10 +68,10 @@ public class SoldierShootAttack : BaseState<Soldier>
 			RaycastHit hit;
 			if (Physics.SphereCast(NPC.transform.position + Vector3.up, 0.2f, NPC.transform.forward, out hit, 50f))
 			{
-			    var hitDetectable = hit.collider.GetComponent<Detectable>();
+				var hitDetectable = hit.collider.GetComponent<Detectable>();
 				if (hitDetectable != null)
 				{
-                    var soldier = hitDetectable.Target.GetComponent<Soldier>();
+					var soldier = hitDetectable.Target.GetComponent<Soldier>();
 					soldier.Die();
 				}
 				else
