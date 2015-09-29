@@ -103,7 +103,10 @@ public class SoldierChase : BaseState<Soldier>
 
 	private void SeeTarget(Transform target)
 	{
-		targetExpirationCooldown = TargetExpirationTime;
-		chaseTarget = target;
+	    if (target != NPC.transform)
+	    {
+	        targetExpirationCooldown = TargetExpirationTime;
+	        chaseTarget = target;
+	    }
 	}
 }

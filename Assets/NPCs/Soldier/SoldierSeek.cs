@@ -47,14 +47,16 @@ public class SoldierSeek : BaseState<Soldier>
 	}
 
     private void SeeTarget(Transform target)
-	{
-		NPC.State = new SoldierChase(NPC, target);
-	}
+    {
+        if (target != NPC.transform)
+            NPC.State = new SoldierChase(NPC, target);
+    }
 
-	private void HearTarget(Transform target)
-	{
-		SeekPoint = target.position;
-	}
+    private void HearTarget(Transform target)
+    {
+        if (target != NPC.transform)
+            SeekPoint = target.position;
+    }
 
     private void CheckSensors()
     {

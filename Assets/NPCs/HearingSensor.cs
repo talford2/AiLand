@@ -11,7 +11,7 @@ public class HearingSensor : MonoBehaviour
         foreach (var detected in detectedObjects)
         {
             Debug.Log("DETECTED: " + detected.name);
-            action(detected.transform);
+            action(detected.GetComponent<Detectable>().Target);
         }
     }
 

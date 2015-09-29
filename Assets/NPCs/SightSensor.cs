@@ -23,7 +23,7 @@ public class SightSensor : MonoBehaviour
                 {
                     Debug.Log("DETECTED: " + sightHit.collider.name);
                     if (sightHit.collider == candidate)
-                        action(candidate.transform);
+                        action(candidate.GetComponent<Detectable>().Target);
                 }
             }
         }

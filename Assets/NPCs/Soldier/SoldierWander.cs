@@ -47,28 +47,14 @@ public class SoldierWander : BaseState<Soldier>
 
     private void SeeTarget(Transform target)
     {
-        // TODO: Do this more efficiently
-        var npcTarget = target.GetComponentInParent<NpcTarget>();
-        if (npcTarget != null)
-        {
-            if (npcTarget.Team != NPC.GetComponent<NpcTarget>().Team)
-            {
-                NPC.State = new SoldierChase(NPC, target);
-            }
-        }
+        if (target != NPC.transform)
+            NPC.State = new SoldierChase(NPC, target);
     }
 
     private void HearTarget(Transform target)
     {
-        // TODO: Do this more efficiently
-        var npcTarget = target.GetComponentInParent<NpcTarget>();
-        if (npcTarget != null)
-        {
-            if (npcTarget.Team != NPC.GetComponent<NpcTarget>().Team)
-            {
-                NPC.State = new SoldierSeek(NPC, target.position);
-            }
-        }
+        if (target != NPC.transform)
+            NPC.State = new SoldierSeek(NPC, target.position);
     }
 
     private Vector3 GetWanderPosition()
