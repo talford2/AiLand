@@ -60,6 +60,7 @@ public class SoldierChase : BaseState<Soldier>
 		if (chaseTarget == null)
 		{
 			NPC.State = new SoldierWander(NPC);
+			return;
 		}
 
 		CheckSensors();
