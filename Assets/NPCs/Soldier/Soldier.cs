@@ -12,13 +12,13 @@ public class Soldier : BaseNPC
 
 	public SightSensor SightSensor { get; set; }
 
-    public HearingSensor HearingSensor { get; set; }
+	public HearingSensor HearingSensor { get; set; }
 
 	public float ShootAttackRadius = 3;
 
 	public float Speed { get; set; }
 
-    public float TargetSpeed { get; set; }
+	public float TargetSpeed { get; set; }
 
 	void Awake()
 	{
@@ -43,9 +43,14 @@ public class Soldier : BaseNPC
 		return State;
 	}
 
-    public override void NPCUpdate()
-    {
-        base.NPCUpdate();
-        Speed = Mathf.Lerp(Speed, TargetSpeed, 2f*Time.deltaTime);
-    }
+	public override void NPCUpdate()
+	{
+		base.NPCUpdate();
+		Speed = Mathf.Lerp(Speed, TargetSpeed, 2f * Time.deltaTime);
+	}
+
+	public void Die()
+	{
+		Debug.Log(name + " die");
+	}
 }
