@@ -12,7 +12,7 @@ public class Soldier : BaseNPC
 
 	public SightSensor SightSensor { get; set; }
 
-	public HearingSensor HearingSensor;
+    public HearingSensor HearingSensor { get; set; }
 
 	public float ShootAttackRadius = 3;
 

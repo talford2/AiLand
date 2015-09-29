@@ -1345,7 +1345,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
-  HearingSensor: {fileID: 0}
   ShootAttackRadius: 6
 --- !u!114 &11418886
 MonoBehaviour:
@@ -1358,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd1033b4dc9103478b6030d82a38470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 30
+  Distance: 50
 --- !u!114 &11480740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1382,7 +1381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fcb314ecc7f9b1429ca36b1db5b168d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 10
+  Distance: 20
   FieldOfView: 60
   TransformObject: {fileID: 483288}
 --- !u!114 &11496040
@@ -1502,7 +1501,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distance
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FieldOfView
