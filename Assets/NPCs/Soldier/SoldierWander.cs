@@ -17,8 +17,8 @@ public class SoldierWander : BaseState<Soldier>
     public SoldierWander(Soldier npc) : base(npc)
     {
         Debug.Log("Wander");
-        wanderDestination = GetWanderPosition();
         npcPath = new NpcPath(NPC);
+        wanderDestination = GetWanderPosition();
 
         hearInterval = 0.3f;
         seeInterval = 0.3f;
@@ -65,13 +65,15 @@ public class SoldierWander : BaseState<Soldier>
 
         var wanderPosition = NPC.transform.position + NPC.transform.forward*wanderDistance + new Vector3(randomInCircle.x, 0f, randomInCircle.y);
 
-        var wanderRay = new Ray(Utility.AtHeight(NPC.transform.position, 1f), Utility.AtHeight(wanderPosition, 1f) - Utility.AtHeight(NPC.transform.position, 1f));
-        RaycastHit wanderHit;
-        if (Physics.Raycast(wanderRay, out wanderHit, wanderDistance))
+        if (!npcPath.PathExistsTo(wanderPosition))
         {
-            var remainingDistance = wanderDistance - wanderHit.distance;
-            wanderPosition = wanderHit.point + Vector3.Reflect(wanderRay.direction, wanderHit.normal).normalized*remainingDistance;
-            //wanderPosition = wanderHit.point + wanderHit.normal*remainingDistance;
+            var wanderRay = new Ray(Utility.AtHeight(NPC.transform.position, 1f), Utility.AtHeight(wanderPosition, 1f) - Utility.AtHeight(NPC.transform.position, 1f));
+            RaycastHit wanderHit;
+            if (Physics.Raycast(wanderRay, out wanderHit, wanderDistance))
+            {
+                var remainingDistance = wanderDistance - wanderHit.distance;
+                wanderPosition = wanderHit.point + Vector3.Reflect(wanderRay.direction, wanderHit.normal).normalized*remainingDistance;
+            }
         }
         return wanderPosition;
     }

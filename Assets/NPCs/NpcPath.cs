@@ -39,6 +39,12 @@ public class NpcPath {
         }
     }
 
+    public bool PathExistsTo(Vector3 destination)
+    {
+        var tempPath = new NavMeshPath();
+        return NavMesh.CalculatePath(NPC.transform.position, destination, NavMesh.AllAreas, tempPath);
+    }
+
     public void Update(Vector3 destination)
     {
         hasArrived = false;
