@@ -553,6 +553,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 418832}
   - 135: {fileID: 13598060}
+  - 114: {fileID: 11456720}
   m_Layer: 8
   m_Name: Detectable
   m_TagString: Untagged
@@ -1430,6 +1431,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Distance: 50
+--- !u!114 &11456720
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 176790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac811be4b78e7c46af94ccf1a2ef1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 412328}
 --- !u!114 &11480740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1590,6 +1603,10 @@ Prefab:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 412328}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185452}
