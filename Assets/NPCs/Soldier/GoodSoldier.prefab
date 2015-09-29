@@ -1418,6 +1418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationController: {fileID: 9555350}
   ShootAttackRadius: 6
+  Corpse: {fileID: 170820, guid: e10a29d77f453ab4097cd21120fee6cb, type: 2}
 --- !u!114 &11418886
 MonoBehaviour:
   m_ObjectHideFlags: 1
