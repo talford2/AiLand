@@ -51,13 +51,13 @@ public class Soldier : BaseNPC
 		Speed = Mathf.Lerp(Speed, TargetSpeed, 2f * Time.deltaTime);
 	}
 
-	public void Die()
-	{
-		Debug.Log(name + " die");
-		if (Corpse != null)
-		{
-			var corpse = Instantiate(Corpse);
-			corpse.transform.position = transform.position;
+    public void Die()
+    {
+        Debug.Log(name + " die");
+        if (Corpse != null)
+        {
+            var corpse = Instantiate(Corpse);
+            corpse.transform.position = transform.position;
 
             var liveParts = transform.FindChild("Ground").GetComponentsInChildren<Transform>();
             var deadParts = corpse.transform.FindChild("Ground").GetComponentsInChildren<Transform>();
@@ -72,7 +72,8 @@ public class Soldier : BaseNPC
                     }
                 }
             }
-		}
-		Destroy(gameObject);
-	}
+        }
+        SpawnerManager.TriggerRandom();
+        Destroy(gameObject);
+    }
 }
