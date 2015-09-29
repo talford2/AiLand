@@ -63,6 +63,14 @@ public class NpcPath {
             hasArrived = true;
             curPathIndex = path.Length - 1;
         }
+
+        // Debug draw path
+        var fromPoint = path[0];
+        for (var i = 0; i < path.Length - 1; i++)
+        {
+            Debug.DrawLine(fromPoint, path[i + 1], Color.magenta);
+            fromPoint = path[i + 1];
+        }
     }
 
     public bool IsFinalPathPoint()
