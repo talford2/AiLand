@@ -70,7 +70,8 @@ public class SoldierWander : BaseState<Soldier>
         if (Physics.Raycast(wanderRay, out wanderHit, wanderDistance))
         {
             var remainingDistance = wanderDistance - wanderHit.distance;
-            wanderPosition = wanderHit.point + wanderHit.normal*remainingDistance;
+            wanderPosition = wanderHit.point + Vector3.Reflect(wanderRay.direction, wanderHit.normal).normalized*remainingDistance;
+            //wanderPosition = wanderHit.point + wanderHit.normal*remainingDistance;
         }
         return wanderPosition;
     }
