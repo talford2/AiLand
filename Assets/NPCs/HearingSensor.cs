@@ -17,7 +17,7 @@ public class HearingSensor : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		Gizmos.color = Color.white;
+	    Gizmos.color = Color.green;
 		Gizmos.DrawWireSphere(transform.position, Distance);
 	}
 }
