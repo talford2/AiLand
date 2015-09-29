@@ -21,7 +21,7 @@ public class SightSensor : MonoBehaviour
                 RaycastHit sightHit;
                 if (Physics.Raycast(sightRay, out sightHit, Distance))
                 {
-                    Debug.Log("DETECTED: " + sightHit.collider.name);
+                    Debug.Log("SEE: " + sightHit.collider.name);
                     if (sightHit.collider == candidate)
                         action(candidate.GetComponent<Detectable>().Target);
                 }
