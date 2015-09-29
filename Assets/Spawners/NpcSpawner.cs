@@ -2,7 +2,7 @@
 
 public class NpcSpawner : MonoBehaviour
 {
-    public GameObject SpawnPrefab;
+    public GameObject DefaultSpawnPrefab;
 
     private void Awake()
     {
@@ -11,6 +11,11 @@ public class NpcSpawner : MonoBehaviour
 
     public void Trigger()
     {
-        Instantiate(SpawnPrefab, transform.position, transform.rotation);
+        Trigger(DefaultSpawnPrefab);
+    }
+
+    public void Trigger(GameObject spawnPrefab)
+    {
+        Instantiate(spawnPrefab, transform.position, transform.rotation);
     }
 }

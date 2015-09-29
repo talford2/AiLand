@@ -20,4 +20,11 @@ public class SpawnerManager
         var randomSpawner = Spawners[Random.Range(0, Spawners.Count)];
         randomSpawner.Trigger();
     }
+
+    public static void TriggerRandom(GameObject spawnPrefab)
+    {
+        var randomSpawner = Spawners[Random.Range(0, Spawners.Count)];
+        randomSpawner.Trigger(spawnPrefab);
+    }
+
 }

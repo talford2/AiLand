@@ -21,6 +21,7 @@ public class Soldier : BaseNPC
 	public float TargetSpeed { get; set; }
 
 	public GameObject Corpse;
+    public GameObject DieSpawnPrefab;
 
 	void Awake()
 	{
@@ -73,7 +74,7 @@ public class Soldier : BaseNPC
                 }
             }
         }
-        SpawnerManager.TriggerRandom();
+        SpawnerManager.TriggerRandom(DieSpawnPrefab);
         Destroy(gameObject);
     }
 }

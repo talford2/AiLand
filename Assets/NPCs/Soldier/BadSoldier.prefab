@@ -1347,6 +1347,7 @@ MonoBehaviour:
   AnimationController: {fileID: 9555350}
   ShootAttackRadius: 6
   Corpse: {fileID: 176744, guid: 87e08a2f21fc7164a880ad7f680c2cd9, type: 2}
+  DieSpawnPrefab: {fileID: 185452}
 --- !u!114 &11418886
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1537,6 +1538,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: DieSpawnPrefab
+      value: 
+      objectReference: {fileID: 185452}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185452}
