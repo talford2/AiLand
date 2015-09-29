@@ -12,6 +12,7 @@ public class SoldierShootAttack : BaseState<Soldier>
 		attackTarget = target;
 
 		NPC.TargetSpeed = 0f;
+		attackCooldown = Random.Range(0, AttackInterval);
 	}
 
 	private Vector3 GetSteeringForce()
