@@ -56,8 +56,22 @@ public class Soldier : BaseNPC
 		Debug.Log(name + " die");
 		if (Corpse != null)
 		{
-			var corpse = Instantiate<GameObject>(Corpse);
+			var corpse = Instantiate(Corpse);
 			corpse.transform.position = transform.position;
+
+            var liveParts = transform.FindChild("Ground").GetComponentsInChildren<Transform>();
+            var deadParts = corpse.transform.FindChild("Ground").GetComponentsInChildren<Transform>();
+            foreach (var livePart in liveParts)
+            {
+                foreach (var deadPart in deadParts)
+                {
+                    if (livePart.name == deadPart.name)
+                    {
+                        deadPart.transform.localPosition = livePart.transform.localPosition;
+                        deadPart.transform.localRotation = livePart.transform.localRotation;
+                    }
+                }
+            }
 		}
 		Destroy(gameObject);
 	}
