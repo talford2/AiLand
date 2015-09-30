@@ -9,7 +9,7 @@ public class NeighborSensor : MonoBehaviour {
         var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
         foreach (var detected in detectedObjects)
         {
-            Debug.Log("NEIGHBOR: " + detected.GetComponent<Detectable>().name);
+            //Debug.Log("NEIGHBOR: " + detected.GetComponent<Detectable>().name);
             action(detected.GetComponent<Detectable>().Target);
         }
     }

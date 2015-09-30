@@ -10,7 +10,7 @@ public class HearingSensor : MonoBehaviour
         var detectedObjects = Physics.OverlapSphere(transform.position, Distance, LayerMask.GetMask("Detectable"));
         foreach (var detected in detectedObjects)
         {
-            Debug.Log("HEAR: " + detected.GetComponent<Detectable>().name);
+            //Debug.Log("HEAR: " + detected.GetComponent<Detectable>().name);
             action(detected.GetComponent<Detectable>().Target);
         }
     }

@@ -65,7 +65,7 @@ public class NpcPath {
 
         if (curPathIndex > path.Length - 1)
         {
-            Debug.Log("DESTINATION REACHED!");
+            //Debug.Log("DESTINATION REACHED!");
             hasArrived = true;
             curPathIndex = path.Length - 1;
         }

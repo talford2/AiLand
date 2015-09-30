@@ -48,7 +48,7 @@ public class SoldierSeek : BaseState<Soldier>
 
 		if (useArriveForce)
 		{
-			steerForce += NPC.Steering.ArriveForce(npcPath.GetCurrentPathTargetPosition());
+		    steerForce += NPC.Steering.ArriveForce(SeekPoint);//npcPath.GetCurrentPathTargetPosition());
 			if (steerForce.sqrMagnitude > sqrMaxSpeed)
 				return NPC.Speed * steerForce.normalized;
 		}
