@@ -20,6 +20,7 @@ public class SoldierWander : BaseState<Soldier>
 
     public SoldierWander(Soldier npc) : base(npc)
     {
+        Name = "Wander";
         Debug.Log("Wander");
         npcPath = new NpcPath(NPC);
         wanderDestination = GetWanderPosition();

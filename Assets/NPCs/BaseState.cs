@@ -4,6 +4,7 @@ public abstract class BaseState<T> : IState
 {
 	public float IntervalTime = 0.2f;
 	private float intervalCooldown = 0;
+    public string Name { get; set; }
 
 	private T npc;
 

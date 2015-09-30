@@ -31,6 +31,11 @@ public class Soldier : BaseNPC
 	    NeighborSensor = GetComponent<NeighborSensor>();
 		SightSensor = GetComponent<SightSensor>();
 		HearingSensor = GetComponent<HearingSensor>();
+	    stateStyle = new GUIStyle
+	    {
+	        normal = {textColor = Color.yellow},
+            alignment = TextAnchor.MiddleCenter
+	    };
 	}
 
 	public bool IsDistanceGreaterThan(Vector3 position, float distance)
@@ -53,6 +58,7 @@ public class Soldier : BaseNPC
 	{
 		base.NPCUpdate();
 		Speed = Mathf.Lerp(Speed, TargetSpeed, 2f * Time.deltaTime);
+	    screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 	}
 
     public void Die()
@@ -79,5 +85,13 @@ public class Soldier : BaseNPC
         }
         SpawnerManager.TriggerRandom(DieSpawnPrefab);
         Destroy(gameObject);
+    }
+
+    private Vector2 screenPosition;
+    private GUIStyle stateStyle;
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(screenPosition.x - 50f, Screen.height - screenPosition.y - 50f, 100f, 30f), State.Name, stateStyle);
     }
 }

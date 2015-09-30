@@ -24,29 +24,34 @@ public class SoldierSeek : BaseState<Soldier>
 
     private List<Transform> neighbors;
 
-	public SoldierSeek(Soldier npc, Vector3 seekPoint) : base(npc)
-	{
-		Debug.Log("Seek");
-		SeekPoint = seekPoint;
+    public SoldierSeek(Soldier npc, Vector3 seekPoint) : base(npc)
+    {
+        Name = "Seek";
+        Debug.Log("Seek");
 
-	    neighborInterval = 0.1f;
-	    seeInterval = 0.3f;
-	    hearInterval = 0.3f;
+        var toTarget = seekPoint - NPC.transform.position;
+        SeekPoint = seekPoint - toTarget.normalized*2f;
 
-		npcPath = new NpcPath(NPC);
+        neighborInterval = 0.1f;
+        seeInterval = 0.3f;
+        hearInterval = 0.3f;
+
+        npcPath = new NpcPath(NPC);
         neighbors = new List<Transform>();
 
-	    NPC.TargetSpeed = 0.5f;
-	}
+        NPC.TargetSpeed = 0.5f;
+    }
 
-	private Vector3 GetSteeringForce()
+    private Vector3 GetSteeringForce()
 	{
 		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
 
+        /*
 	    steerForce += NPC.Steering.SeparationForce(neighbors, NPC.NeighborSensor.Distance);
         if (steerForce.sqrMagnitude > sqrMaxSpeed)
             return NPC.Speed * steerForce.normalized;
+        */
 
 		if (useArriveForce)
 		{
@@ -108,6 +113,7 @@ public class SoldierSeek : BaseState<Soldier>
             NPC.NeighborSensor.Detect(DetectNeighbor);
             neighborCooldown = neighborInterval;
         }
+
         var detectionOccurred = false;
         seeCooldown -= Time.deltaTime;
         if (seeCooldown < 0f)
@@ -142,7 +148,10 @@ public class SoldierSeek : BaseState<Soldier>
         else
         {
             if (closestHeardTarget != null)
-                SeekPoint = closestHeardTarget.position;
+            {
+                var toTarget = closestHeardTarget.position - NPC.transform.position;
+                SeekPoint = closestHeardTarget.position - toTarget.normalized * 2f;
+            }
         }
     }
 

@@ -14,7 +14,7 @@ public class NeighborSensor : MonoBehaviour {
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, Distance);

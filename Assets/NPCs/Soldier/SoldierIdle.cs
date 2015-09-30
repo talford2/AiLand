@@ -10,6 +10,7 @@ public class SoldierIdle : BaseState<Soldier>
 
 	public SoldierIdle(Soldier npc) : base(npc)
 	{
+	    Name = "Idle";
 		Debug.Log("Idle");
 		IntervalTime = 0.3f;
 

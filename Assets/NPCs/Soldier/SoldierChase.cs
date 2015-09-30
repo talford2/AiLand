@@ -23,6 +23,7 @@ public class SoldierChase : BaseState<Soldier>
 
 	public SoldierChase(Soldier npc, Transform chaseTransform) : base(npc)
 	{
+	    Name = "Chase";
 		Debug.Log("Chase");
 		chaseTarget = chaseTransform;
 		npcPath = new NpcPath(NPC);
@@ -54,7 +55,6 @@ public class SoldierChase : BaseState<Soldier>
 		steerForce += NPC.Steering.SeekForce(npcPath.GetCurrentPathTargetPosition());
 		if (steerForce.sqrMagnitude > sqrMaxSpeed)
 			return NPC.Speed * steerForce.normalized;
-
 		return steerForce;
 	}
 
@@ -91,7 +91,10 @@ public class SoldierChase : BaseState<Soldier>
 			return;
 		}
 
-		npcPath.Update(chaseTarget.position);
+        var toTarget = chaseTarget.position - NPC.transform.position;
+	    var destination = chaseTarget.position - toTarget.normalized*(NPC.ShootAttackRadius - 1f);
+
+		npcPath.Update(destination);
 		useArriveForce = npcPath.IsFinalPathPoint();
 
 		NPC.Velocity += GetSteeringForce() * Time.deltaTime;
@@ -114,7 +117,7 @@ public class SoldierChase : BaseState<Soldier>
 		NPC.AnimationController.SetFloat("HorizontalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.right));
 		NPC.AnimationController.SetFloat("VerticalSpeed", Vector3.Dot(targetForward.normalized * NPC.Speed, NPC.transform.forward));
 
-		npcPath.SetLastDestination(chaseTarget.position);
+        npcPath.SetLastDestination(destination);
 
 		// Target expires start seeking
 		targetExpirationCooldown -= Time.deltaTime;
