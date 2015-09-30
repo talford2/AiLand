@@ -17,6 +17,7 @@ public class SoldierSeek : BaseState<Soldier>
 
     private float hearInterval;
     private float hearCooldown;
+    private float closestHeardTargetDistanceSquared;
 
     private List<Transform> neighbors;
 
@@ -75,10 +76,15 @@ public class SoldierSeek : BaseState<Soldier>
 
     private void HearTarget(Transform target)
     {
-        if (!neighbors.Contains(target))
-            neighbors.Add(target);
         if (target != NPC.transform)
-            SeekPoint = target.position;
+        {
+            var toTargetDistanceSquared = (target.position - NPC.transform.position).sqrMagnitude;
+            if (toTargetDistanceSquared < closestHeardTargetDistanceSquared)
+            {
+                closestHeardTargetDistanceSquared = toTargetDistanceSquared;
+                SeekPoint = target.position;
+            }
+        }
     }
 
     private void CheckSensors()
@@ -99,6 +105,7 @@ public class SoldierSeek : BaseState<Soldier>
         hearCooldown -= Time.deltaTime;
         if (hearCooldown < 0f)
         {
+            closestHeardTargetDistanceSquared = Mathf.Infinity;
             NPC.HearingSensor.Detect(HearTarget);
             hearCooldown = hearInterval;
         }
