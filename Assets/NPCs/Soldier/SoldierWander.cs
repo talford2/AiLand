@@ -4,9 +4,13 @@ public class SoldierWander : BaseState<Soldier>
 {
     private float hearInterval;
     private float hearCooldown;
+    private float closestHeardTargetDistanceSquared;
+    private Transform closestHeardTarget;
 
     private float seeInterval;
     private float seeCooldown;
+    private float closestSeenTargetDistanceSquared;
+    private Transform closestSeenTarget;
 
     private bool useArriveForce;
 
@@ -48,11 +52,29 @@ public class SoldierWander : BaseState<Soldier>
     private void SeeTarget(Transform target)
     {
         if (target != NPC.transform)
-            NPC.State = new SoldierChase(NPC, target);
+        {
+            var toTargetDistanceSquared = (target.position - NPC.transform.position).sqrMagnitude;
+            if (toTargetDistanceSquared < closestSeenTargetDistanceSquared)
+            {
+                closestSeenTargetDistanceSquared = toTargetDistanceSquared;
+                closestSeenTarget = target;
+                //NPC.State = new SoldierChase(NPC, target);
+            }
+        }
     }
 
     private void HearTarget(Transform target)
     {
+        if (target != NPC.transform)
+        {
+            var toTargetDistanceSquared = (target.position - NPC.transform.position).sqrMagnitude;
+            if (toTargetDistanceSquared < closestHeardTargetDistanceSquared)
+            {
+                closestHeardTargetDistanceSquared = toTargetDistanceSquared;
+                closestHeardTarget = target;
+                //SeekPoint = target.position;
+            }
+        }
         if (target != NPC.transform)
             NPC.State = new SoldierSeek(NPC, target.position);
     }
@@ -80,17 +102,41 @@ public class SoldierWander : BaseState<Soldier>
 
     private void CheckSensors()
     {
+        var detectionOccurred = false;
         seeCooldown -= Time.deltaTime;
         if (seeCooldown < 0f)
         {
+            closestSeenTargetDistanceSquared = Mathf.Infinity;
+            closestSeenTarget = null;
             NPC.SightSensor.Detect(SeeTarget);
             seeCooldown = seeInterval;
+            detectionOccurred = true;
         }
+
         hearCooldown -= Time.deltaTime;
         if (hearCooldown < 0f)
         {
+            closestHeardTargetDistanceSquared = Mathf.Infinity;
+            closestHeardTarget = null;
             NPC.HearingSensor.Detect(HearTarget);
             hearCooldown = hearInterval;
+            detectionOccurred = true;
+        }
+
+        if (detectionOccurred)
+            HandleTarget();
+    }
+
+    private void HandleTarget()
+    {
+        if (closestSeenTarget != null)
+        {
+            NPC.State = new SoldierChase(NPC, closestSeenTarget);
+        }
+        else
+        {
+            if (closestHeardTarget != null)
+                NPC.State = new SoldierSeek(NPC, closestHeardTarget.position);
         }
     }
 
