@@ -29,8 +29,7 @@ public class SoldierSeek : BaseState<Soldier>
         Name = "Seek";
         Debug.Log("Seek");
 
-        var toTarget = seekPoint - NPC.transform.position;
-        SeekPoint = seekPoint - toTarget.normalized*2f;
+        SeekPoint = seekPoint;
 
         neighborInterval = 0.1f;
         seeInterval = 0.3f;
@@ -47,15 +46,13 @@ public class SoldierSeek : BaseState<Soldier>
 		var sqrMaxSpeed = NPC.Speed * NPC.Speed;
 		var steerForce = Vector3.zero;
 
-        /*
 	    steerForce += NPC.Steering.SeparationForce(neighbors, NPC.NeighborSensor.Distance);
         if (steerForce.sqrMagnitude > sqrMaxSpeed)
             return NPC.Speed * steerForce.normalized;
-        */
 
 		if (useArriveForce)
 		{
-		    steerForce += NPC.Steering.ArriveForce(SeekPoint);//npcPath.GetCurrentPathTargetPosition());
+		    steerForce += NPC.Steering.ArriveForce(SeekPoint);
 			if (steerForce.sqrMagnitude > sqrMaxSpeed)
 				return NPC.Speed * steerForce.normalized;
 		}
@@ -85,7 +82,6 @@ public class SoldierSeek : BaseState<Soldier>
             {
                 closestSeenTargetDistanceSquared = toTargetDistanceSquared;
                 closestSeenTarget = target;
-                //NPC.State = new SoldierChase(NPC, target);
             }
         }
     }
@@ -99,7 +95,6 @@ public class SoldierSeek : BaseState<Soldier>
             {
                 closestHeardTargetDistanceSquared = toTargetDistanceSquared;
                 closestHeardTarget = target;
-                //SeekPoint = target.position;
             }
         }
     }
@@ -149,8 +144,7 @@ public class SoldierSeek : BaseState<Soldier>
         {
             if (closestHeardTarget != null)
             {
-                var toTarget = closestHeardTarget.position - NPC.transform.position;
-                SeekPoint = closestHeardTarget.position - toTarget.normalized * 2f;
+                SeekPoint = closestHeardTarget.position;
             }
         }
     }
@@ -165,9 +159,17 @@ public class SoldierSeek : BaseState<Soldier>
         NPC.Velocity += GetSteeringForce() * Time.deltaTime;
 
 		// Locomotion
-		var targetForward = Utility.AtHeight(npcPath.GetCurrentPathTargetPosition(), 0f) - Utility.AtHeight(NPC.transform.position, 0f);
+        Vector3 targetForward;
+        if (npcPath.IsFinalPathPoint())
+        {
+            targetForward = Utility.AtHeight(SeekPoint, 0f) - Utility.AtHeight(NPC.transform.position, 0f);
+        }
+        else
+        {
+            targetForward = Utility.AtHeight(npcPath.GetCurrentPathTargetPosition(), 0f) - Utility.AtHeight(NPC.transform.position, 0f);
+        }
 
-		NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), Time.deltaTime);
+		NPC.transform.rotation = Quaternion.Lerp(NPC.transform.rotation, Quaternion.LookRotation(targetForward), 5f*Time.deltaTime);
 		NPC.AnimationController.SetBool("IsAim", true);
 		NPC.AnimationController.SetFloat("Speed", NPC.Velocity.magnitude);
 
