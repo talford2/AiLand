@@ -586,6 +586,7 @@ GameObject:
   - 114: {fileID: 11486614}
   - 114: {fileID: 11418886}
   - 114: {fileID: 11480740}
+  - 114: {fileID: 11451008}
   - 54: {fileID: 5492672}
   m_Layer: 0
   m_Name: BadSoldier
@@ -1360,6 +1361,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Distance: 30
+--- !u!114 &11451008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b20d5099fc1400f44858ce2ed6f17cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Distance: 5
 --- !u!114 &11480740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1504,7 +1517,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: Distance
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: FieldOfView
