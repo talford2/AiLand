@@ -14,6 +14,7 @@ public class SoldierSeek : BaseState<Soldier>
 
     private float seeInterval;
     private float seeCooldown;
+    private float closestSeenTargetDistanceSquared;
 
     private float hearInterval;
     private float hearCooldown;
@@ -71,7 +72,14 @@ public class SoldierSeek : BaseState<Soldier>
     private void SeeTarget(Transform target)
     {
         if (target != NPC.transform)
-            NPC.State = new SoldierChase(NPC, target);
+        {
+            var toTargetDistanceSquared = (target.position - NPC.transform.position).sqrMagnitude;
+            if (toTargetDistanceSquared < closestSeenTargetDistanceSquared)
+            {
+                closestSeenTargetDistanceSquared = toTargetDistanceSquared;
+                NPC.State = new SoldierChase(NPC, target);
+            }
+        }
     }
 
     private void HearTarget(Transform target)
@@ -99,6 +107,7 @@ public class SoldierSeek : BaseState<Soldier>
         seeCooldown -= Time.deltaTime;
         if (seeCooldown < 0f)
         {
+            closestSeenTargetDistanceSquared = Mathf.Infinity;
             NPC.SightSensor.Detect(SeeTarget);
             seeCooldown = seeInterval;
         }
