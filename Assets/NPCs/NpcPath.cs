@@ -47,6 +47,11 @@ public class NpcPath {
 
     public void Update(Vector3 destination)
     {
+        Update(destination, 0.1f);
+    }
+
+    public void Update(Vector3 destination, float deltaThreshold)
+    {
         hasArrived = false;
 
         var deltaDestination = destination - lastDestination;
@@ -57,7 +62,7 @@ public class NpcPath {
         }
 
         var toCurPathPos = Utility.AtHeight(path[curPathIndex], 0f) - Utility.AtHeight(NPC.transform.position, 0f);
-        if (toCurPathPos.sqrMagnitude < 0.1f)
+        if (toCurPathPos.sqrMagnitude < deltaThreshold)
         {
             curPathIndex++;
             isFinalPoint = curPathIndex >= path.Length - 1;
