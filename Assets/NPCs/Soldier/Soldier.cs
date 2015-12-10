@@ -68,7 +68,7 @@ public class Soldier : BaseNPC
         {
             var corpse = Instantiate(Corpse);
             corpse.transform.position = transform.position;
-
+            corpse.GetComponentInChildren<SkinnedMeshRenderer>().material = GetComponentInChildren<SkinnedMeshRenderer>().material;
             var liveParts = transform.FindChild("Ground").GetComponentsInChildren<Transform>();
             var deadParts = corpse.transform.FindChild("Ground").GetComponentsInChildren<Transform>();
             foreach (var livePart in liveParts)
