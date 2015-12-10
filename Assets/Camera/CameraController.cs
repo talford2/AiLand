@@ -9,6 +9,9 @@ public class CameraController : MonoBehaviour
     {
         delta = 10f*new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         closeness = 100f*Input.GetAxis("Mouse ScrollWheel");
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+            Application.Quit();
     }
 
     private void LateUpdate()
